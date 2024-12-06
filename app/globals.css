@@ -43,16 +43,13 @@ body {
     transition: all 0.3s ease;
     border-radius: 12px;
     overflow: hidden;
-    /* Rundade hörn för knappen */
   }
 
   .neon-button-wrapper {
     position: relative;
     display: inline-block;
     border-radius: 12px;
-    /* Samma border-radius som knappen */
     overflow: hidden;
-    /* Klipper allt utanför runda kanterna */
   }
 
   .neon-button:hover {
@@ -65,12 +62,13 @@ body {
     -webkit-box-reflect: below 0.5px linear-gradient(transparent, #0005);
     overflow: hidden;
     border-radius: 12px;
-    /* Klipper allt utanför runda kanterna */
   }
 }
 
+/* ... resten av din CSS ... */
+
 @supports (backdrop-filter: blur(20px)) {
-  .backdrop-blur-[20px] {
+  .backdrop-blur {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-radius: 12px;
@@ -78,7 +76,6 @@ body {
   }
 }
 
-/* Lägg till denna CSS för tröjformen */
 .clip-path-jersey {
   clip-path: polygon(25% 0%,
       75% 0%,
