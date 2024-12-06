@@ -1,0 +1,14 @@
+{
+    "education": [
+        {
+            "title": "Computer Science",
+            "company": "Singapore Institute of Technology",
+            "location": "Singapore",
+            "startDate": "2020",
+            "endDate": "2024",
+            "description": [
+                "First Class Honours"
+            ]
+        }
+    ]
+}

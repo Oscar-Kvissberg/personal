@@ -1,0 +1,30 @@
+{
+    "career": [
+        {
+            "title": "Graduate Associate (SEED Programme)",
+            "company": "DBS Bank",
+            "location": "Singapore",
+            "startDate": "Jul 2023",
+            "logo": "/dbs-logo.png",
+            "description": [
+                "Developed the Java backend for a bank account servicing process with multiple channel integrations using Activiti workflow",
+                "Built a custom database migration tool using Python and MariaDB and facilitated the migration of 1000+ processes from a vendor platform"
+            ]
+        },
+        {
+            "title": "Software Developer (Contract)",
+            "company": "Singapore Institute of Technology",
+            "location": "Singapore",
+            "startDate": "Apr 2023",
+            "endDate": "Jun 2023",
+            "logo": "/sit-logo.png",
+            "description": [
+                "Built NFTVue, a NFT gallery website that allows students to connect their crypto wallets to view and verify their school event-issued NFTs",
+                "Worked on DemoConstruct, a full-stack web application (React + Python) that uses Meshroom to reconstruct 3D models from captured images"
+            ],
+            "tags": [
+                "NFTVue"
+            ]
+        }
+    ]
+}
