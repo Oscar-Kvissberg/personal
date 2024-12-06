@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { TeamData, Player } from '@/app/types'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import { LineGraph } from '@/components/LineGraph'
 
 const FPL = () => {
     const [teamId] = useState<string>('2222751')
@@ -151,64 +151,9 @@ const FPL = () => {
     const renderPointsGraph = () => {
         if (!historicData.length) return null
 
-        const data = historicData.map(gw => ({
-            name: `GW ${gw.event}`,
-            points: gw.points,
-            average: gw.average_points,
-            highest: gw.highest_score
-        }))
-
         return (
-            <div className="mt-8 p-6 rounded-xl border border-gray-700 bg-gray-800/20" style={{ height: '400px' }}>
-                <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={data}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                        <XAxis
-                            dataKey="name"
-                            stroke="white"
-                            tick={{ fill: 'white' }}
-                        />
-                        <YAxis
-                            stroke="white"
-                            tick={{ fill: 'white' }}
-                        />
-                        <Tooltip
-                            contentStyle={{
-                                backgroundColor: '#1f2937',
-                                border: '1px solid #374151',
-                                color: 'white'
-                            }}
-                        />
-                        <Legend
-                            wrapperStyle={{ color: 'white' }}
-                        />
-                        <Line
-                            type="monotone"
-                            dataKey="highest"
-                            name="Högsta poäng"
-                            stroke="#fbbf24"
-                            strokeDasharray="5 5"
-                            strokeWidth={1}
-                            dot={false}
-                        />
-                        <Line
-                            type="monotone"
-                            dataKey="points"
-                            name="Mina poäng"
-                            stroke="#4ade80"
-                            strokeWidth={2}
-                            dot={{ fill: '#4ade80' }}
-                        />
-                        <Line
-                            type="monotone"
-                            dataKey="average"
-                            name="Genomsnitt"
-                            stroke="#f87171"
-                            strokeWidth={2}
-                            dot={{ fill: '#f87171' }}
-                        />
-                    </LineChart>
-                </ResponsiveContainer>
+            <div className="mt-8 p-6 rounded-xl border border-gray-700 bg-gray-800/20">
+                <LineGraph data={historicData} />
             </div>
         )
     }
