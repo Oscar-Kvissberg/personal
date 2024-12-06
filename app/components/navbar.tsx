@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import Image from 'next/image'
-import { UserCircleIcon, FolderIcon, EnvelopeIcon } from '@heroicons/react/24/outline'
+import { UserCircleIcon, FolderIcon, EnvelopeIcon, ChartBarIcon } from '@heroicons/react/24/outline'
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -65,6 +65,13 @@ const Navbar = () => {
                         >
                             <EnvelopeIcon className="w-5 h-5" />
                             Kontakt
+                        </Link>
+                        <Link
+                            href="/fpl"
+                            className="text-gray-200 hover:text-white transition-colors flex items-center gap-3"
+                        >
+                            <ChartBarIcon className="w-5 h-5" />
+                            Fantasy Premier League
                         </Link>
                     </div>
                 </div>

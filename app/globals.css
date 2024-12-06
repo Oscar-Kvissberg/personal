@@ -77,3 +77,13 @@ body {
     overflow: hidden;
   }
 }
+
+/* Lägg till denna CSS för tröjformen */
+.clip-path-jersey {
+  clip-path: polygon(25% 0%,
+      75% 0%,
+      100% 25%,
+      100% 100%,
+      0% 100%,
+      0% 25%);
+}
