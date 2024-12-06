@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 
 interface DataPoint {
     event: number
@@ -10,11 +10,25 @@ interface DataPoint {
 
 interface LineGraphProps {
     data: DataPoint[]
-    width?: number
     height?: number
 }
 
-export const LineGraph = ({ data, width = 800, height = 400 }: LineGraphProps) => {
+export const LineGraph = ({ data, height = 400 }: LineGraphProps) => {
+    const containerRef = useRef<HTMLDivElement>(null)
+    const [width, setWidth] = useState(800)
+
+    useEffect(() => {
+        if (containerRef.current) {
+            const updateWidth = () => {
+                setWidth(containerRef.current?.clientWidth || 800)
+            }
+
+            updateWidth()
+            window.addEventListener('resize', updateWidth)
+            return () => window.removeEventListener('resize', updateWidth)
+        }
+    }, [])
+
     const padding = 40
     const graphWidth = width - padding * 2
     const graphHeight = height - padding * 2
@@ -41,68 +55,70 @@ export const LineGraph = ({ data, width = 800, height = 400 }: LineGraphProps) =
     const highestLine = createLine(data.map(d => d.highest_score))
 
     return (
-        <svg width={width} height={height} className="bg-gray-800/20 rounded-xl">
-            {/* Grid */}
-            {Array.from({ length: 6 }).map((_, i) => {
-                const y = yScale(minValue + (i * (maxValue - minValue) / 5))
-                return (
-                    <g key={i}>
-                        <line
-                            x1={padding}
-                            y1={y}
-                            x2={width - padding}
-                            y2={y}
-                            stroke="rgba(255,255,255,0.1)"
-                            strokeDasharray="3,3"
-                        />
-                        <text
-                            x={padding - 5}
-                            y={y}
-                            textAnchor="end"
-                            alignmentBaseline="middle"
-                            fill="white"
-                            fontSize="12"
-                        >
-                            {Math.round(minValue + (i * (maxValue - minValue) / 5))}
-                        </text>
+        <div ref={containerRef} className="w-full">
+            <svg width={width} height={height} className="bg-gray-800/20 rounded-xl">
+                {/* Grid */}
+                {Array.from({ length: 6 }).map((_, i) => {
+                    const y = yScale(minValue + (i * (maxValue - minValue) / 5))
+                    return (
+                        <g key={i}>
+                            <line
+                                x1={padding}
+                                y1={y}
+                                x2={width - padding}
+                                y2={y}
+                                stroke="rgba(255,255,255,0.1)"
+                                strokeDasharray="3,3"
+                            />
+                            <text
+                                x={padding - 5}
+                                y={y}
+                                textAnchor="end"
+                                alignmentBaseline="middle"
+                                fill="white"
+                                fontSize="12"
+                            >
+                                {Math.round(minValue + (i * (maxValue - minValue) / 5))}
+                            </text>
+                        </g>
+                    )
+                })}
+
+                {/* X-axis labels */}
+                {data.map((d, i) => (
+                    <text
+                        key={i}
+                        x={xScale(i)}
+                        y={height - padding / 2}
+                        textAnchor="middle"
+                        fill="white"
+                        fontSize="12"
+                    >
+                        {d.event}
+                    </text>
+                ))}
+
+                {/* Lines */}
+                <path d={highestLine} stroke="#fbbf24" strokeWidth="1" fill="none" strokeDasharray="5,5" />
+                <path d={pointsLine} stroke="#4ade80" strokeWidth="2" fill="none" />
+                <path d={averageLine} stroke="#f87171" strokeWidth="2" fill="none" />
+
+                {/* Legend */}
+                <g transform={`translate(${width - 150}, 20)`}>
+                    <g>
+                        <line x1="0" y1="0" x2="20" y2="0" stroke="#fbbf24" strokeDasharray="5,5" />
+                        <text x="25" y="4" fill="white" fontSize="12">Högsta poäng</text>
                     </g>
-                )
-            })}
-
-            {/* X-axis labels */}
-            {data.map((d, i) => (
-                <text
-                    key={i}
-                    x={xScale(i)}
-                    y={height - padding / 2}
-                    textAnchor="middle"
-                    fill="white"
-                    fontSize="12"
-                >
-                    {d.event}
-                </text>
-            ))}
-
-            {/* Lines */}
-            <path d={highestLine} stroke="#fbbf24" strokeWidth="1" fill="none" strokeDasharray="5,5" />
-            <path d={pointsLine} stroke="#4ade80" strokeWidth="2" fill="none" />
-            <path d={averageLine} stroke="#f87171" strokeWidth="2" fill="none" />
-
-            {/* Legend */}
-            <g transform={`translate(${width - 150}, 20)`}>
-                <g>
-                    <line x1="0" y1="0" x2="20" y2="0" stroke="#fbbf24" strokeDasharray="5,5" />
-                    <text x="25" y="4" fill="white" fontSize="12">Högsta poäng</text>
+                    <g transform="translate(0, 20)">
+                        <line x1="0" y1="0" x2="20" y2="0" stroke="#4ade80" strokeWidth="2" />
+                        <text x="25" y="4" fill="white" fontSize="12">Mina poäng</text>
+                    </g>
+                    <g transform="translate(0, 40)">
+                        <line x1="0" y1="0" x2="20" y2="0" stroke="#f87171" strokeWidth="2" />
+                        <text x="25" y="4" fill="white" fontSize="12">Genomsnitt</text>
+                    </g>
                 </g>
-                <g transform="translate(0, 20)">
-                    <line x1="0" y1="0" x2="20" y2="0" stroke="#4ade80" strokeWidth="2" />
-                    <text x="25" y="4" fill="white" fontSize="12">Mina poäng</text>
-                </g>
-                <g transform="translate(0, 40)">
-                    <line x1="0" y1="0" x2="20" y2="0" stroke="#f87171" strokeWidth="2" />
-                    <text x="25" y="4" fill="white" fontSize="12">Genomsnitt</text>
-                </g>
-            </g>
-        </svg>
+            </svg>
+        </div>
     )
 } 

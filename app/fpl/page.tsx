@@ -65,9 +65,9 @@ const FPL = () => {
 
         return (
             <div className="relative max-w-5xl mx-auto">
-                <div className="flex gap-8">
+                <div className="flex flex-col lg:flex-row gap-8">
                     {/* Gameweek-väljare */}
-                    <div className="w-40">
+                    <div className="w-full lg:w-40 order-1">
                         <div className="flex flex-col gap-2 mb-4">
                             <label htmlFor="gameweek" className="text-white whitespace-nowrap">
                                 Välj gameweek:
@@ -91,29 +91,15 @@ const FPL = () => {
                         </div>
                     </div>
 
-                    {/* Bänken */}
-                    <div className="w-40">
-                        <div className="border border-gray-700 rounded-lg p-6 bg-gray-800/20 h-full flex flex-col">
-                            <h4 className="text-white text-base font-semibold mb-6">Bänken</h4>
-                            <div className="flex-1 flex flex-col justify-evenly">
-                                {substitutes.map((player) => (
-                                    <div key={player.id} className="flex items-center justify-center">
-                                        <PlayerIcon player={player} small={false} />
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-
                     {/* Fotbollsplan med startelvan */}
-                    <div className="flex-1 relative aspect-[2/1.8]">
+                    <div className="flex-1 relative aspect-[2/2.2] min-h-[400px] lg:min-h-0 order-2">
                         {/* Fotbollsplan bakgrund */}
                         <div className="absolute inset-0 border-2 border-gray-600 bg-gradient-to-b from-green-900/20 to-green-800/20 rounded-lg">
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full border-2 border-gray-600" />
                             <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gray-600" />
 
                             {/* Gameweek poäng i överkant */}
-                            <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-32 p-2 rounded-lg border border-gray-700 bg-gray-800/50 text-center">
+                            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 p-2 rounded-lg border border-gray-700 bg-gray-800/50 text-center">
                                 <p className="text-2xl font-bold text-white">
                                     {teamData?.gameweek_points || 0}
                                 </p>
@@ -140,6 +126,19 @@ const FPL = () => {
                             {/* Målvakt */}
                             <div className="absolute top-[82%] left-0 right-0">
                                 {renderPlayerRow(goalkeepers)}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Bänken - visas under planen på mobil */}
+                    <div className="w-full lg:w-40 order-3">
+                        <div className="border border-gray-700 rounded-lg px-4 py-8 lg:px-6 lg:py-10 bg-gray-800/20 h-full">
+                            <div className="flex lg:flex-col overflow-x-auto lg:overflow-x-visible justify-between items-center h-full">
+                                {substitutes.map((player) => (
+                                    <div key={player.id} className="flex-shrink-0">
+                                        <PlayerIcon player={player} small={false} />
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
@@ -230,7 +229,7 @@ const FPL = () => {
     return (
         <div className="min-h-screen">
             <div className="container mx-auto px-4 py-8">
-                <h1 className="text-3xl font-bold mb-6 text-white">Mitt FPL-lag</h1>
+
 
                 {loading && (
                     <div className="text-blue-200 p-4 rounded-lg mb-4">
