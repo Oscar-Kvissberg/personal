@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { TeamData, Player } from '@/app/types'
-import { LineGraph } from '@/components/LineGraph'
+import { LineGraph } from '@/app/components/LineGraph'
 
 const FPL = () => {
     const [teamId] = useState<string>('2222751')
