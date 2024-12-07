@@ -1,29 +1,51 @@
 {
     "career": [
         {
-            "title": "Graduate Associate (SEED Programme)",
-            "company": "DBS Bank",
-            "location": "Singapore",
-            "startDate": "Jul 2023",
-            "logo": "/dbs-logo.png",
+            "title": "Co-founder and CEO",
+            "company": "Catalina Software Solutions AB",
+            "location": "Stockholm, Sweden",
+            "startDate": "Jun 2024",
             "description": [
-                "Developed the Java backend for a bank account servicing process with multiple channel integrations using Activiti workflow",
-                "Built a custom database migration tool using Python and MariaDB and facilitated the migration of 1000+ processes from a vendor platform"
+                "Developed an Excel VBA calculation template for automatically calculating depreciation and charges related to apartment inspections",
+                "Developed a web application for AI generation of policies for sports clubs in Sweden",
+                "Built features including account management, email reminders, and digital signatures",
+                "Tech stack: Next.js, Python, Tailwind CSS, PostgreSQL"
             ]
         },
         {
-            "title": "Software Developer (Contract)",
-            "company": "Singapore Institute of Technology",
-            "location": "Singapore",
-            "startDate": "Apr 2023",
-            "endDate": "Jun 2023",
-            "logo": "/sit-logo.png",
+            "title": "Business Development and Sponsorship Contact",
+            "company": "LIU Formula Student",
+            "location": "Linköping, Sweden",
+            "startDate": "Jan 2024",
             "description": [
-                "Built NFTVue, a NFT gallery website that allows students to connect their crypto wallets to view and verify their school event-issued NFTs",
-                "Worked on DemoConstruct, a full-stack web application (React + Python) that uses Meshroom to reconstruct 3D models from captured images"
-            ],
-            "tags": [
-                "NFTVue"
+                "Developed a Next.js/Python system for managing the Bill of Materials (BOM) for formula car components",
+                "Created business strategy as part of the cost and business team",
+                "Strengthened collaboration with existing sponsors and attracted new sponsorships",
+                "Led team to highest-ever sponsorship revenue of approximately 400,000 SEK"
+            ]
+        },
+        {
+            "title": "Area Coordinator and Apartment Inspector",
+            "company": "Stångåstaden AB",
+            "location": "Linköping, Sweden",
+            "startDate": "Jun 2023",
+            "description": [
+                "Handled administration and planning of property management to ensure customer orders and needs in home maintenance and repairs were met",
+                "Worked closely with customers to fulfill their needs and maintain good relationships",
+                "Conducted thorough inspections of over 40 apartments, reviewing safety and maintenance standards in detail",
+                "Collaborated with a supervisor on approximately 20 additional inspections to identify areas for improvement"
+            ]
+        },
+        {
+            "title": "Teaching Assistant in Steel Structures",
+            "company": "Linköping University",
+            "location": "Norrköping, Sweden",
+            "startDate": "Sep 2023",
+            "endDate": "Oct 2023",
+            "description": [
+                "Mentored and provided guidance to a class of 30 students in calculations for steel structures",
+                "Took a leading role both during lectures and lab sessions",
+                "Developed strong skills in project planning and effective communication"
             ]
         }
     ]

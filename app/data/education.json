@@ -1,13 +1,25 @@
 {
     "education": [
         {
-            "title": "Computer Science",
-            "company": "Singapore Institute of Technology",
-            "location": "Singapore",
-            "startDate": "2020",
-            "endDate": "2024",
+            "title": "Master of Science - Industrial Engineering and Management",
+            "company": "Linköping University",
+            "location": "Linköping, Sweden",
+            "startDate": "2023",
             "description": [
-                "First Class Honours"
+                "Minor in Innovation Management",
+                "Courses in Project Management, Operations Strategy, Lean, and Innovation and Change Management",
+                "Additional courses in Finance, Cybersecurity, and AI"
+            ]
+        },
+        {
+            "title": "Bachelor of Science - Construction Engineering",
+            "company": "Linköping University",
+            "location": "Linköping, Sweden",
+            "startDate": "2020",
+            "endDate": "2023",
+            "description": [
+                "Courses in Mathematics, Statistics, Leadership and Organization",
+                "Construction Calculations and CAD courses"
             ]
         }
     ]

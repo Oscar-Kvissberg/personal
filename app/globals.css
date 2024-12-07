@@ -22,12 +22,44 @@
 
 body {
   color: white;
-  background-image: url('/bg10.png');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  background-color: #030712;
   font-family: var(--font-geist-sans);
   min-height: 100vh;
+}
+
+/* Uppdatera alla text-färger till vit */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a,
+div {
+  color: white;
+}
+
+/* Uppdatera opacity-baserade färger */
+.text-white\/80 {
+  color: white;
+}
+
+.text-white\/60 {
+  color: white;
+}
+
+.text-gray-200 {
+  color: white;
+}
+
+.text-gray-300 {
+  color: white;
+}
+
+.text-gray-400 {
+  color: white;
 }
 
 @layer base {
@@ -59,7 +91,7 @@ body {
       0 0 25px #03e9f4,
       0 0 50px #03e9f4,
       0 0 200px #03e9f4;
-    -webkit-box-reflect: below 0.5px linear-gradient(transparent, #0005);
+    -webkit-box-reflect: below 0.5px linear-gradient(transparent, #0005) border-radius;
     overflow: hidden;
     border-radius: 12px;
   }
