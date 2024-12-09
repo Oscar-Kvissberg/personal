@@ -1,6 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Player, BootstrapData, Fixture, CaptainSuggestion } from '@/app/types'
 
+// Hjälpfunktion för att göra API-anrop via proxy
+async function fetchWithProxy(url: string) {
+    // Använd en CORS proxy
+    const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(url)}`
+    const response = await fetch(proxyUrl)
+
+    if (!response.ok) {
+        throw new Error(`Failed to fetch ${url}: ${response.statusText}`)
+    }
+
+    return response.json()
+}
+
 // Flytta funktionen utanför GET-funktionen
 function suggestCaptain(
     players: Player[],
@@ -86,20 +99,18 @@ export async function GET(request: NextRequest) {
         const gameweek = searchParams.get('gameweek')
         const teamId = '2222751'
 
-        // Hämta grundläggande lagdata
-        const teamResponse = await fetch(`https://fantasy.premierleague.com/api/entry/${teamId}/`)
-        if (!teamResponse.ok) throw new Error('Kunde inte hämta lagdata')
-        const teamData = await teamResponse.json()
+        // Uppdatera alla API-anrop att använda fetchWithProxy
+        const teamData = await fetchWithProxy(
+            `https://fantasy.premierleague.com/api/entry/${teamId}/`
+        )
 
-        // Hämta bootstrap-data för spelare och lag
-        const bootstrapResponse = await fetch('https://fantasy.premierleague.com/api/bootstrap-static/')
-        if (!bootstrapResponse.ok) throw new Error('Kunde inte hämta spelardata')
-        const bootstrapData = await bootstrapResponse.json()
+        const bootstrapData = await fetchWithProxy(
+            'https://fantasy.premierleague.com/api/bootstrap-static/'
+        )
 
-        // Hämta fixtures-data
-        const fixturesResponse = await fetch('https://fantasy.premierleague.com/api/fixtures/')
-        if (!fixturesResponse.ok) throw new Error('Kunde inte hämta fixtures')
-        const fixturesData = await fixturesResponse.json()
+        const fixturesData = await fetchWithProxy(
+            'https://fantasy.premierleague.com/api/fixtures/'
+        )
 
         // Bestäm vilken gameweek som ska användas
         type BootstrapEvent = {
@@ -114,19 +125,19 @@ export async function GET(request: NextRequest) {
             bootstrapData.events.findLast((event: BootstrapEvent) => event.finished)?.id
 
         // Hämta laguppställning för specifik gameweek
-        const pickResponse = await fetch(`https://fantasy.premierleague.com/api/entry/${teamId}/event/${targetGameweek}/picks/`)
-        if (!pickResponse.ok) throw new Error('Kunde inte hämta laguppställning')
-        const pickData = await pickResponse.json()
+        const pickData = await fetchWithProxy(
+            `https://fantasy.premierleague.com/api/entry/${teamId}/event/${targetGameweek}/picks/`
+        )
 
         // Hämta live-poäng för gameweeken
-        const liveResponse = await fetch(`https://fantasy.premierleague.com/api/event/${targetGameweek}/live/`)
-        if (!liveResponse.ok) throw new Error('Kunde inte hämta live-poäng')
-        const liveData = await liveResponse.json()
+        const liveData = await fetchWithProxy(
+            `https://fantasy.premierleague.com/api/event/${targetGameweek}/live/`
+        )
 
         // Hämta historik för hela säsongen
-        const historyResponse = await fetch(`https://fantasy.premierleague.com/api/entry/${teamId}/history/`)
-        if (!historyResponse.ok) throw new Error('Kunde inte hämta historik')
-        const historyData = await historyResponse.json()
+        const historyData = await fetchWithProxy(
+            `https://fantasy.premierleague.com/api/entry/${teamId}/history/`
+        )
 
         // Hitta data för den specifika gameweeken
         const gameweekHistory = historyData.current.find((gw: any) => gw.event === targetGameweek)
