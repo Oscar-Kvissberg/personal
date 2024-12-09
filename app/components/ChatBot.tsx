@@ -17,7 +17,10 @@ export default function ChatBot({ onOpenChat }: ChatBotProps) {
     const [isOpen, setIsOpen] = useState(false)
 
     useEffect(() => {
-        onOpenChat(() => setIsOpen(true))
+        onOpenChat(() => {
+            setIsOpen(true)
+            setIsExpanded(true)
+        })
     }, [onOpenChat])
 
     const handleSubmit = async (e: React.FormEvent) => {
