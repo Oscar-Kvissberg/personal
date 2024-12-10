@@ -9,7 +9,13 @@
                 "Minor in Innovation Management",
                 "Courses in Project Management, Operations Strategy, Lean, and Innovation and Change Management",
                 "Additional courses in Finance, Cybersecurity, and AI"
-            ]
+            ],
+            "tags": [
+                "Innovation Management",
+                "Project Management",
+                "Business Strategy"
+            ],
+            "logo": "/images/liu logga.png"
         },
         {
             "title": "Bachelor of Science - Construction Engineering",
@@ -20,7 +26,13 @@
             "description": [
                 "Courses in Mathematics, Statistics, Leadership and Organization",
                 "Construction Calculations and CAD courses"
-            ]
+            ],
+            "tags": [
+                "Engineering",
+                "Mathematics",
+                "Leadership"
+            ],
+            "logo": "/images/liu logga.png"
         }
     ]
 }
