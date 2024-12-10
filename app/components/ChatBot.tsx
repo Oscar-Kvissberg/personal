@@ -66,7 +66,7 @@ export default function ChatBot({ onOpenChat }: ChatBotProps) {
             {!isOpen ? (
                 <button
                     onClick={() => setIsOpen(true)}
-                    className="bg-blue-500 hover:bg-blue-600 text-white p-4 rounded-full shadow-lg transition-colors"
+                    className="bg-[#03e9f4] hover:scale-105 text-black p-4 rounded-full shadow-lg transition-all neon-button-glow"
                 >
                     <BsChatDots className="w-6 h-6" />
                 </button>

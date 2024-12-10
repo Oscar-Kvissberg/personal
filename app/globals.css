@@ -95,6 +95,45 @@ div {
     overflow: hidden;
     border-radius: 12px;
   }
+
+  .neon-text {
+    position: relative;
+    color: #03e9f4;
+    text-shadow: 0 0 5px #03e9f4,
+      0 0 25px #03e9f4,
+      0 0 50px #03e9f4;
+    transition: all 0.3s ease;
+  }
+
+  .text-shadow-strong {
+    text-shadow: 0 0 10px #03e9f4,
+      0 0 30px #03e9f4,
+      0 0 80px #03e9f4,
+      0 0 120px #03e9f4;
+  }
+
+  .neon-icon {
+    color: #03e9f4;
+    filter: drop-shadow(0 0 5px #03e9f4) drop-shadow(0 0 25px #03e9f4) drop-shadow(0 0 50px #03e9f4);
+    transition: all 0.3s ease;
+  }
+
+  .filter-strong {
+    filter: drop-shadow(0 0 15px #03e9f4) drop-shadow(0 0 45px #03e9f4) drop-shadow(0 0 85px #03e9f4) drop-shadow(0 0 120px #03e9f4);
+  }
+
+  .neon-button-glow {
+    box-shadow: 0 0 5px #03e9f4,
+      0 0 25px #03e9f4,
+      0 0 50px #03e9f4;
+  }
+
+  .neon-button-glow:hover {
+    box-shadow: 0 0 10px #03e9f4,
+      0 0 30px #03e9f4,
+      0 0 80px #03e9f4,
+      0 0 120px #03e9f4;
+  }
 }
 
 /* ... resten av din CSS ... */

@@ -34,14 +34,14 @@ export default function Home() {
                   22-year-old student from Sweden
                 </p>
                 <p className="text-sm sm:text-base text-white/80">
-                  I like to solve problems, drink instant coffee and watch premier league.
+                  I like to solve problems, drink instant coffee and watch Premier League.
                 </p>
                 <button
                   onClick={handleOpenChat}
-                  className="flex items-center gap-2 text-blue-400 text-xs sm:text-sm mt-2 hover:text-blue-300 transition-colors group"
+                  className="flex items-center gap-2 text-xs sm:text-sm mt-2 group hover:scale-105 transition-transform origin-left"
                 >
-                  <span className="text-blue-400 group-hover:underline group-hover:text-blue-300">Ask the chatbot anything about me</span>
-                  <BsArrowDownRight className="w-4 h-4 sm:w-5 sm:h-5 animate-bounce text-blue-400 group-hover:text-blue-300" />
+                  <span className="neon-text group-hover:text-shadow-strong">Ask the chatbot anything about me</span>
+                  <BsArrowDownRight className="w-4 h-4 sm:w-5 sm:h-5 animate-bounce neon-icon group-hover:filter-strong" />
                 </button>
               </div>
 
