@@ -30,7 +30,7 @@ const Navbar = () => {
             <button
                 id="hamburger-button"
                 onClick={() => setIsOpen(!isOpen)}
-                className="fixed top-4 left-4 z-[51] p-2 hover:bg-gray-800/50 rounded-lg transition-colors"
+                className="fixed top-0 h-10 flex items-center left-4 z-[51] p-2 hover:bg-gray-800/50 rounded-lg transition-colors"
             >
                 <div className="flex flex-col gap-1.5 w-6">
                     <span className={`block h-0.5 w-full bg-gray-200 transition-transform duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`} />
@@ -39,7 +39,10 @@ const Navbar = () => {
                 </div>
             </button>
 
-            {/* Navbar */}
+            {/* Horisontell navbar */}
+            <div className="fixed top-0 left-0 right-0 h-10 backdrop-blur-[4px] bg-gray-900/10 border-b border-gray-200/10 z-40" />
+
+            {/* Sidonav */}
             <nav
                 ref={navRef}
                 className={`
