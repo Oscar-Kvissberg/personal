@@ -92,7 +92,7 @@ const FPL = () => {
                     </div>
 
                     {/* Fotbollsplan med startelvan */}
-                    <div className="flex-1 relative aspect-[2/2.2] min-h-[400px] lg:min-h-0 order-2">
+                    <div className="flex-1 relative aspect-[2/3] sm:aspect-[2/2.2] min-h-[500px] sm:min-h-[400px] lg:min-h-0 order-2">
                         {/* Fotbollsplan bakgrund */}
                         <div className="absolute inset-0 border-2 border-gray-600 bg-gradient-to-b from-green-900/20 to-green-800/20 rounded-lg">
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full border-2 border-gray-600" />
@@ -106,25 +106,25 @@ const FPL = () => {
                             </div>
                         </div>
 
-                        {/* Spelare på planen */}
+                        {/* Spelare på planen - justera positionerna */}
                         <div className="absolute inset-0">
                             {/* Anfallare */}
-                            <div className="absolute top-[10%] left-0 right-0">
+                            <div className="absolute top-[12%] sm:top-[10%] left-0 right-0">
                                 {renderPlayerRow(forwards)}
                             </div>
 
                             {/* Mittfältare */}
-                            <div className="absolute top-[35%] left-0 right-0">
+                            <div className="absolute top-[35%] sm:top-[35%] left-0 right-0">
                                 {renderPlayerRow(midfielders)}
                             </div>
 
                             {/* Försvarare */}
-                            <div className="absolute top-[60%] left-0 right-0">
+                            <div className="absolute top-[58%] sm:top-[60%] left-0 right-0">
                                 {renderPlayerRow(defenders)}
                             </div>
 
                             {/* Målvakt */}
-                            <div className="absolute top-[82%] left-0 right-0">
+                            <div className="absolute top-[78%] sm:top-[82%] left-0 right-0">
                                 {renderPlayerRow(goalkeepers)}
                             </div>
                         </div>
@@ -135,7 +135,7 @@ const FPL = () => {
                         <div className="border border-gray-700 rounded-lg px-4 py-8 lg:px-6 lg:py-10 bg-gray-800/20 h-full">
                             <div className="flex lg:flex-col overflow-x-auto lg:overflow-x-visible justify-between items-center h-full">
                                 {substitutes.map((player) => (
-                                    <div key={player.id} className="flex-shrink-0">
+                                    <div key={player.id} className="flex-shrink-0 py-4">
                                         <PlayerIcon player={player} small={false} />
                                     </div>
                                 ))}
@@ -168,13 +168,19 @@ const FPL = () => {
                 <h3 className="text-xl font-bold text-white mb-4">
                     Viktat kaptenförslag för GW {nextGW}
                 </h3>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="flex flex-col sm:grid sm:grid-cols-3 gap-4">
                     {teamData.captainSuggestions.map((suggestion, index) => (
                         <div key={index} className="p-4 border border-gray-700 rounded-lg">
-                            <div className="text-lg font-bold text-white mb-2">
-                                {index + 1}. {suggestion.name}
+                            <div className="flex items-center gap-3 mb-2">
+                                <div className="text-2xl font-bold text-white/50">
+                                    {index + 1}.
+                                </div>
+                                <div className="text-lg font-bold text-white">
+                                    {suggestion.name}
+                                </div>
                             </div>
-                            <div className="space-y-2 text-sm">
+
+                            <div className="grid grid-cols-2 sm:grid-cols-1 gap-x-4 gap-y-2 text-sm">
                                 <div className="text-gray-300">
                                     Form: {suggestion.form} (x2)
                                 </div>
@@ -195,16 +201,20 @@ const FPL = () => {
                                         Nollor: {suggestion.cleanSheets}
                                     </div>
                                 )}
-                                <div className="mt-3 pt-3 border-t border-gray-700">
-                                    <div className="text-gray-300">
-                                        Nästa match: {suggestion.isHome ? 'Hemma' : 'Borta'} mot {suggestion.nextOpponent}
-                                    </div>
-                                    <div className="text-gray-300">
-                                        Svårighetsgrad: {suggestion.difficulty}/5 (x1)
-                                    </div>
+                            </div>
+
+                            <div className="mt-3 pt-3 border-t border-gray-700">
+                                <div className="text-gray-300">
+                                    Nästa match: {suggestion.isHome ? 'Hemma' : 'Borta'} mot {suggestion.nextOpponent}
                                 </div>
-                                <div className="mt-3 pt-3 border-t border-gray-700">
-                                    <div className="text-sm font-semibold text-white">Beräkning:</div>
+                                <div className="text-gray-300">
+                                    Svårighetsgrad: {suggestion.difficulty}/5 (x1)
+                                </div>
+                            </div>
+
+                            <div className="mt-3 pt-3 border-t border-gray-700">
+                                <div className="text-sm font-semibold text-white">Beräkning:</div>
+                                <div className="grid grid-cols-2 sm:grid-cols-1 gap-x-4 text-sm">
                                     <div className="text-gray-300">
                                         Form: {suggestion.form} × 2 = {(suggestion.form * 2).toFixed(1)}
                                     </div>
@@ -214,9 +224,9 @@ const FPL = () => {
                                     <div className="text-gray-300">
                                         Svårighet: {5 - suggestion.difficulty} × 1 = {(5 - suggestion.difficulty).toFixed(1)}
                                     </div>
-                                    <div className="text-white font-semibold mt-1">
-                                        Total: {suggestion.totalScore?.toFixed(1)}
-                                    </div>
+                                </div>
+                                <div className="text-white font-semibold mt-1">
+                                    Total: {suggestion.totalScore?.toFixed(1)}
                                 </div>
                             </div>
                         </div>
