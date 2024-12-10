@@ -24,7 +24,7 @@ export default function Home() {
 
   return (
     <>
-      <main className="w-full px-2 sm:container sm:mx-auto sm:px-16 md:px-32 lg:px-64 py-8 mt-16">
+      <main className="w-full px-2 sm:container sm:mx-auto sm:px-16 md:px-32 lg:px-64 py-8 mt-8 sm:mt-12">
         <div className="flex flex-col gap-8 max-w-2xl mx-auto">
           <div className="grid grid-cols-[1fr,auto] gap-4 sm:gap-8">
             <div className="flex flex-col gap-6">
