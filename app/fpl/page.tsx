@@ -237,8 +237,8 @@ const FPL = () => {
     }
 
     return (
-        <div className="min-h-screen mt-16">
-            <div className="container mx-auto px-4 pt-8 pb-8">
+        <div className="min-h-screen">
+            <div className="container mx-auto px-4 pt-4 sm:pt-8 pb-8 mt-2 sm:mt-4">
                 {loading && (
                     <div className="text-blue-200 p-4 rounded-lg mb-4">
                         Laddar...
