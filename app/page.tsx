@@ -26,8 +26,8 @@ export default function Home() {
     <>
       <main className="max-w-3xl mx-auto px-4 py-8">
         <div className="flex flex-col gap-8">
-          <div className="grid grid-cols-[1fr,auto] gap-8 items-stretch">
-            <div className="flex flex-col gap-6 h-full">
+          <div className="grid grid-cols-[1fr,auto] gap-8">
+            <div className="flex flex-col gap-6">
               <div className="space-y-2">
                 <h1 className="text-4xl font-bold text-white">Hi Oscar here 👋</h1>
                 <p className="text-white/80">
@@ -45,7 +45,7 @@ export default function Home() {
                 </button>
               </div>
 
-              <div className="flex gap-4 mt-auto mb-8">
+              <div className="flex gap-4">
                 <LinkWithIcon
                   href="/resume.pdf"
                   text="Resume"
@@ -56,7 +56,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="flex flex-col justify-end h-full">
+            <div>
               <Image
                 src="/pp.jpg"
                 alt="Profile picture"
