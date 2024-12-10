@@ -26,26 +26,26 @@ export default function Home() {
     <>
       <main className="max-w-3xl mx-auto px-4 py-8">
         <div className="flex flex-col gap-8">
-          <div className="grid grid-cols-[1fr,auto] gap-8">
+          <div className="grid grid-cols-[1fr,auto] gap-4 sm:gap-8">
             <div className="flex flex-col gap-6">
               <div className="space-y-2">
-                <h1 className="text-4xl font-bold text-white">Hi Oscar here 👋</h1>
-                <p className="text-white/80">
+                <h1 className="text-2xl sm:text-4xl font-bold text-white">Hi Oscar here 👋</h1>
+                <p className="text-sm sm:text-base text-white/80">
                   22-year-old student from Sweden
                 </p>
-                <p className="text-white/80">
+                <p className="text-sm sm:text-base text-white/80">
                   I like to solve problems, drink instant coffee and watch premier league.
                 </p>
                 <button
                   onClick={handleOpenChat}
-                  className="flex items-center gap-2 text-blue-400 text-sm mt-2 hover:text-blue-300 transition-colors group"
+                  className="flex items-center gap-2 text-blue-400 text-xs sm:text-sm mt-2 hover:text-blue-300 transition-colors group"
                 >
                   <span className="text-blue-400 group-hover:underline group-hover:text-blue-300">Ask the chatbot anything about me</span>
-                  <BsArrowDownRight className="w-5 h-5 animate-bounce text-blue-400 group-hover:text-blue-300" />
+                  <BsArrowDownRight className="w-4 h-4 sm:w-5 sm:h-5 animate-bounce text-blue-400 group-hover:text-blue-300" />
                 </button>
               </div>
 
-              <div className="flex gap-4">
+              <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-4">
                 <LinkWithIcon
                   href="/resume.pdf"
                   text="Resume"
@@ -62,7 +62,7 @@ export default function Home() {
                 alt="Profile picture"
                 width={140}
                 height={140}
-                className="rounded-lg object-cover border border-white/20"
+                className="w-[120px] sm:w-[140px] h-auto rounded-lg object-cover border border-white/20"
               />
             </div>
           </div>
