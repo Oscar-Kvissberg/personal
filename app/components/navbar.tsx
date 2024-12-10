@@ -78,7 +78,7 @@ const Navbar = () => {
                             className="text-gray-200 hover:text-white transition-colors flex items-center gap-3"
                         >
                             <UserCircleIcon className="w-5 h-5" />
-                            Om mig
+                            About me
                         </Link>
                         <Link
                             href="/fpl"
