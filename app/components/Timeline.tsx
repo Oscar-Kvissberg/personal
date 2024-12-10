@@ -13,15 +13,15 @@ export default function Timeline({ experience }: TimelineProps) {
                     <div key={index} className="relative pl-16">
                         {/* Logo circle */}
                         <div className="absolute left-0 top-0">
-                            <div className="relative w-12 h-12">
+                            <div className="relative w-12 h-12 overflow-hidden rounded-full bg-[#030712] z-10">
                                 <div className="absolute inset-0 rounded-full bg-white/10 border border-white/20" />
                                 <div className="absolute inset-0 flex items-center justify-center">
                                     <Image
                                         src={item.logo || '/pp.jpg'}
                                         alt={item.company}
-                                        width={24}
-                                        height={24}
-                                        className="object-contain"
+                                        width={80}
+                                        height={80}
+                                        className="object-contain w-14 h-14"
                                     />
                                 </div>
                             </div>

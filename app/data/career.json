@@ -3,38 +3,61 @@
         {
             "title": "Co-founder and CEO",
             "company": "Catalina Software Solutions AB",
-            "location": "Stockholm, Sweden",
+            "location": "Linköping",
             "startDate": "Jun 2024",
+            "endDate": "Present",
             "description": [
                 "Developed an Excel VBA calculation template for automatically calculating depreciation and charges related to apartment inspections",
                 "Developed a web application for AI generation of policies for sports clubs in Sweden",
-                "Built features including account management, email reminders, and digital signatures",
-                "Tech stack: Next.js, Python, Tailwind CSS, PostgreSQL"
-            ]
+                "Built features including account management, email reminders, and digital signatures"
+            ],
+            "tags": [
+                "Next.js",
+                "Python",
+                "Tailwind CSS",
+                "PostgreSQL",
+                "VBA"
+            ],
+            "logo": "/images/catalina logga.png"
         },
         {
             "title": "Business Development and Sponsorship Contact",
             "company": "LIU Formula Student",
-            "location": "Linköping, Sweden",
+            "location": "Linköping",
             "startDate": "Jan 2024",
+            "endDate": "Present",
             "description": [
                 "Developed a Next.js/Python system for managing the Bill of Materials (BOM) for formula car components",
                 "Created business strategy as part of the cost and business team",
                 "Strengthened collaboration with existing sponsors and attracted new sponsorships",
                 "Led team to highest-ever sponsorship revenue of approximately 400,000 SEK"
-            ]
+            ],
+            "tags": [
+                "Next.js",
+                "Python",
+                "Business Development",
+                "Sponsorship"
+            ],
+            "logo": "/images/formula logga 2.png"
         },
         {
             "title": "Area Coordinator and Apartment Inspector",
             "company": "Stångåstaden AB",
-            "location": "Linköping, Sweden",
+            "location": "Linköping",
             "startDate": "Jun 2023",
+            "endDate": "Present",
             "description": [
                 "Handled administration and planning of property management to ensure customer orders and needs in home maintenance and repairs were met",
                 "Worked closely with customers to fulfill their needs and maintain good relationships",
                 "Conducted thorough inspections of over 40 apartments, reviewing safety and maintenance standards in detail",
                 "Collaborated with a supervisor on approximately 20 additional inspections to identify areas for improvement"
-            ]
+            ],
+            "tags": [
+                "Property Management",
+                "Customer Service",
+                "Inspection"
+            ],
+            "logo": "/images/stnga.png"
         },
         {
             "title": "Teaching Assistant in Steel Structures",
@@ -46,7 +69,13 @@
                 "Mentored and provided guidance to a class of 30 students in calculations for steel structures",
                 "Took a leading role both during lectures and lab sessions",
                 "Developed strong skills in project planning and effective communication"
-            ]
+            ],
+            "tags": [
+                "Teaching",
+                "Steel Structures",
+                "Mentoring"
+            ],
+            "logo": "/images/liu logga.png"
         }
     ]
 }
