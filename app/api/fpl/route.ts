@@ -3,15 +3,29 @@ import { Player, BootstrapData, Fixture, CaptainSuggestion } from '@/app/types'
 
 // Hjälpfunktion för att göra API-anrop via proxy
 async function fetchWithProxy(url: string) {
-    // Använd en CORS proxy
-    const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(url)}`
-    const response = await fetch(proxyUrl)
+    try {
+        // Testa först utan proxy
+        const directResponse = await fetch(url, {
+            signal: AbortSignal.timeout(5000)
+        })
 
-    if (!response.ok) {
-        throw new Error(`Failed to fetch ${url}: ${response.statusText}`)
+        if (directResponse.ok) {
+            return directResponse.json()
+        }
+
+        // Om direkt anrop misslyckas, prova med proxy
+        const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(url)}`
+        const response = await fetch(proxyUrl)
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch ${url}: ${response.statusText}`)
+        }
+
+        return response.json()
+    } catch (error) {
+        console.error('Fetch error:', error)
+        throw error
     }
-
-    return response.json()
 }
 
 // Flytta funktionen utanför GET-funktionen
@@ -96,33 +110,56 @@ function suggestCaptain(
 export async function GET(request: NextRequest) {
     try {
         const searchParams = request.nextUrl.searchParams
-        const gameweek = searchParams.get('gameweek')
-        const teamId = '2222751'
+        const requestedGameweek = searchParams.get('gameweek')
+        const teamId = process.env.FPL_TEAM_ID || '2222751'
 
-        // Uppdatera alla API-anrop att använda fetchWithProxy
-        const teamData = await fetchWithProxy(
-            `https://fantasy.premierleague.com/api/entry/${teamId}/`
-        )
-
+        // Hämta bootstrap data direkt
         const bootstrapData = await fetchWithProxy(
             'https://fantasy.premierleague.com/api/bootstrap-static/'
+        )
+
+        // Hitta den senaste färdigspelade gameweek
+        const lastFinishedGameweek = bootstrapData.events
+            .filter((event: any) => event.finished)
+            .sort((a: any, b: any) => b.id - a.id)[0]
+
+        if (!lastFinishedGameweek) {
+            return NextResponse.json(
+                {
+                    error: 'Kunde inte hitta någon färdigspelad gameweek.',
+                    details: 'Säsongen 2024/25 har inte börjat än. Försök igen när säsongen startar.'
+                },
+                { status: 503 }
+            )
+        }
+
+        // Använd antingen den begärda gameweek (om den är färdigspelad) eller den senaste färdigspelade
+        const targetGameweek = requestedGameweek
+            ? parseInt(requestedGameweek)
+            : lastFinishedGameweek.id
+
+        // Verifiera att den valda gameweek är färdigspelad
+        const isGameweekFinished = bootstrapData.events
+            .find((event: any) => event.id === targetGameweek)?.finished
+
+        if (!isGameweekFinished) {
+            return NextResponse.json(
+                {
+                    error: 'Den valda gameweek har inte spelats f��rdigt än.',
+                    details: `Senaste färdigspelade gameweek är ${lastFinishedGameweek.id}`
+                },
+                { status: 400 }
+            )
+        }
+
+        // Fortsätt med resten av koden...
+        const teamData = await fetchWithProxy(
+            `https://fantasy.premierleague.com/api/entry/${teamId}/`
         )
 
         const fixturesData = await fetchWithProxy(
             'https://fantasy.premierleague.com/api/fixtures/'
         )
-
-        // Bestäm vilken gameweek som ska användas
-        type BootstrapEvent = {
-            id: number
-            is_current: boolean
-            finished: boolean
-        }
-
-        const targetGameweek = gameweek
-            ? parseInt(gameweek)
-            : bootstrapData.events.find((event: BootstrapEvent) => event.is_current)?.id ||
-            bootstrapData.events.findLast((event: BootstrapEvent) => event.finished)?.id
 
         // Hämta laguppställning för specifik gameweek
         const pickData = await fetchWithProxy(
@@ -202,8 +239,11 @@ export async function GET(request: NextRequest) {
     } catch (error) {
         console.error('FPL API Error:', error)
         return NextResponse.json(
-            { error: 'Kunde inte hämta FPL data' },
-            { status: 500 }
+            {
+                error: 'Kunde inte hämta FPL data.',
+                details: error instanceof Error ? error.message : 'Okänt fel'
+            },
+            { status: 503 }
         )
     }
 }

@@ -21,10 +21,15 @@ const FPL = () => {
         setError(null)
         try {
             const response = await fetch(`/api/fpl?gameweek=${gw || ''}`)
-            if (!response.ok) {
-                throw new Error('Kunde inte hämta lagdata')
-            }
             const data = await response.json()
+
+            if (!response.ok) {
+                if (response.status === 503) {
+                    throw new Error(data.error + (data.details ? `\n${data.details}` : ''))
+                }
+                throw new Error(data.error || 'Kunde inte hämta lagdata')
+            }
+
             setTeamData(data)
             setHistoricData(data.history || [])
             if (!gw) {
@@ -32,12 +37,9 @@ const FPL = () => {
                 setSelectedGameweek(data.gameweek)
             }
         } catch (err: unknown) {
-            setError('Något gick fel vid hämtning av FPL-data')
-            if (err instanceof Error) {
-                console.error(err.message)
-            } else {
-                console.error('Ett okänt fel uppstod:', err)
-            }
+            const errorMessage = err instanceof Error ? err.message : 'Ett okänt fel uppstod'
+            setError(errorMessage)
+            console.error('FPL Error:', err)
         } finally {
             setLoading(false)
         }
@@ -82,11 +84,18 @@ const FPL = () => {
                                 }}
                                 className="bg-gray-700 text-white rounded px-3 py-1 border border-gray-600 w-full"
                             >
-                                {[...Array(currentGameweek)].map((_, i) => (
-                                    <option key={i + 1} value={i + 1}>
-                                        GW {i + 1}
-                                    </option>
-                                ))}
+                                {[...Array(currentGameweek)].map((_, i) => {
+                                    const gw = i + 1
+                                    // Visa bara färdigspelade gameweeks
+                                    if (gw <= currentGameweek) {
+                                        return (
+                                            <option key={gw} value={gw}>
+                                                GW {gw}
+                                            </option>
+                                        )
+                                    }
+                                    return null
+                                }).filter(Boolean)}
                             </select>
                         </div>
                     </div>
@@ -246,12 +255,22 @@ const FPL = () => {
                 )}
 
                 {error && (
-                    <div className="text-red-200 p-4 rounded-lg mb-4">
-                        {error}
+                    <div className="flex flex-col items-center justify-center p-8 text-center">
+                        <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-6 max-w-lg">
+                            <h2 className="text-xl font-bold text-white mb-4">
+                                Kunde inte ladda FPL data
+                            </h2>
+                            <p className="text-gray-300 mb-4">
+                                {error}
+                            </p>
+                            <div className="text-sm text-gray-400">
+                                <p>Försök igen om en stund.</p>
+                            </div>
+                        </div>
                     </div>
                 )}
 
-                {teamData && (
+                {teamData && !error && (
                     <div className="space-y-6">
                         <div className="rounded-xl overflow-hidden">
                             <div className="p-6">
@@ -259,7 +278,7 @@ const FPL = () => {
                                     {teamData.name}
                                 </h2>
                                 <p className="text-blue-200">
-                                    Säsong 2023/24
+                                    Säsong 2024/25
                                 </p>
                             </div>
 

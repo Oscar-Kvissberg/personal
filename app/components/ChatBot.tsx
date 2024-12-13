@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { IoMdSend } from 'react-icons/io'
 import { BsChatDots } from 'react-icons/bs'
-import { IoChevronDown, IoChevronUp, IoClose } from 'react-icons/io5'
+import { IoClose } from 'react-icons/io5'
 
 interface ChatBotProps {
     onOpenChat: (openFn: () => void) => void
@@ -13,13 +13,11 @@ export default function ChatBot({ onOpenChat }: ChatBotProps) {
     const [messages, setMessages] = useState<Array<{ role: 'user' | 'assistant', content: string }>>([])
     const [input, setInput] = useState('')
     const [isLoading, setIsLoading] = useState(false)
-    const [isExpanded, setIsExpanded] = useState(true)
     const [isOpen, setIsOpen] = useState(false)
 
     useEffect(() => {
         onOpenChat(() => {
             setIsOpen(true)
-            setIsExpanded(true)
         })
     }, [onOpenChat])
 
