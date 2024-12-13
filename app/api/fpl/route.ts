@@ -107,10 +107,13 @@ function suggestCaptain(
         }))
 }
 
+// Markera routen som dynamisk
+export const dynamic = 'force-dynamic'
+
 export async function GET(request: NextRequest) {
     try {
-        const searchParams = request.nextUrl.searchParams
-        const requestedGameweek = searchParams.get('gameweek')
+        const url = new URL(request.url)
+        const requestedGameweek = url.searchParams.get('gameweek')
         const teamId = process.env.FPL_TEAM_ID || '2222751'
 
         // Hämta bootstrap data direkt
@@ -145,7 +148,7 @@ export async function GET(request: NextRequest) {
         if (!isGameweekFinished) {
             return NextResponse.json(
                 {
-                    error: 'Den valda gameweek har inte spelats f��rdigt än.',
+                    error: 'Den valda gameweek har inte spelats färdigt än.',
                     details: `Senaste färdigspelade gameweek är ${lastFinishedGameweek.id}`
                 },
                 { status: 400 }
