@@ -4,7 +4,7 @@ import Image from 'next/image'
 import LinkWithIcon from './components/LinkWithIcon'
 import Socials from './components/Socials'
 import Experience from './components/Experience'
-import { HiOutlineDocument } from 'react-icons/hi'
+import { HiOutlineDocumentArrowDown } from 'react-icons/hi2'
 import ChatBot from './components/ChatBot'
 import { BsArrowDownRight } from 'react-icons/bs'
 import { useRef } from 'react'
@@ -71,14 +71,24 @@ export default function Home() {
           {/* Vänster kolumn - Fixed position */}
           <div className="lg:fixed lg:w-[50%] min-h-fit lg:h-screen p-4 sm:p-8 lg:pt-0">
             <div className="max-w-xl mx-auto">
-              <div className="grid grid-cols-[1fr,auto] gap-4 sm:gap-8">
-                <div className="flex flex-col gap-6">
+              <div className="grid grid-cols-[140px,minmax(0,1fr)] gap-4 sm:gap-8">
+                <div className="w-[120px] sm:w-[140px] flex-shrink-0">
+                  <Image
+                    src="/pp.jpg"
+                    alt="Profile picture"
+                    width={140}
+                    height={140}
+                    className="w-full h-auto rounded-lg object-cover border border-white/20"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-6 min-w-0">
                   <div className="space-y-2">
-                    <h1 className="text-2xl sm:text-4xl font-bold text-white">
-                      Hi, <span className="neon-text">Oscar</span> here <span className="hover:wave-animation inline-block cursor-pointer">👋</span>
+                    <h1 className="text-2xl sm:text-4xl font-bold text-white truncate">
+                      Hi, <span className="text-white">Oscar</span> here <span className="hover:wave-animation inline-block cursor-pointer">👋</span>
                     </h1>
                     <p className="text-sm sm:text-base text-white/80">
-                      22-year-old student from Sweden
+                      22-year-old Industrial Engineering student from Sweden
                     </p>
                     <p className="text-sm sm:text-base text-white/80">
                       I like to solve problems, drink instant coffee and watch Premier League.
@@ -91,27 +101,17 @@ export default function Home() {
                       <BsArrowDownRight className="w-4 h-4 sm:w-5 sm:h-5 animate-bounce neon-icon group-hover:filter-strong" />
                     </button>
                   </div>
-
-                  <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-4">
-                    <LinkWithIcon
-                      href="/resume.pdf"
-                      text="Resume"
-                      icon={<HiOutlineDocument className="w-5 h-5" />}
-                      download
-                    />
-                    <Socials />
-                  </div>
                 </div>
+              </div>
 
-                <div>
-                  <Image
-                    src="/pp.jpg"
-                    alt="Profile picture"
-                    width={140}
-                    height={140}
-                    className="w-[120px] sm:w-[140px] h-auto rounded-lg object-cover border border-white/20"
-                  />
-                </div>
+              <div className="mt-4 sm:mt-6 flex items-center gap-2 flex-wrap">
+                <LinkWithIcon
+                  href="/resume.pdf"
+                  text="Resume"
+                  icon={<HiOutlineDocumentArrowDown className="w-5 h-5" />}
+                  download
+                />
+                <Socials />
               </div>
             </div>
           </div>

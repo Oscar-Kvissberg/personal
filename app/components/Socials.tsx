@@ -1,25 +1,46 @@
-import LinkWithIcon from './LinkWithIcon'
-import { FaLinkedin, FaGithub } from 'react-icons/fa'
-import { HiOutlineMail } from 'react-icons/hi'
+'use client'
+
+import { FaGithub, FaLinkedin } from 'react-icons/fa'
+import { MdEmail } from 'react-icons/md'
+import { useState } from 'react'
+import EmailForm from './EmailForm'
 
 export default function Socials() {
+    const [isEmailFormOpen, setIsEmailFormOpen] = useState(false)
+
     return (
-        <>
-            <LinkWithIcon
-                href="https://www.linkedin.com/in/oscar-kvissberg/"
-                text="LinkedIn"
-                icon={<FaLinkedin className="w-5 h-5 min-w-[1.25rem] min-h-[1.25rem]" />}
+        <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2">
+                <a
+                    href="https://github.com/Oscar-Kvissberg"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-white/20 text-white neon-button"
+                >
+                    <FaGithub className="w-5 h-5 flex-shrink-0" />
+                    <span className="text-sm">GitHub</span>
+                </a>
+                <a
+                    href="https://www.linkedin.com/in/oscar-kvissberg/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-white/20 text-white neon-button"
+                >
+                    <FaLinkedin className="w-5 h-5 flex-shrink-0" />
+                    <span className="text-sm">LinkedIn</span>
+                </a>
+                <button
+                    onClick={() => setIsEmailFormOpen(true)}
+                    className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-white/20 text-white neon-button"
+                >
+                    <MdEmail className="w-5 h-5 flex-shrink-0" />
+                    <span className="text-sm">Email</span>
+                </button>
+            </div>
+            <EmailForm
+                isOpen={isEmailFormOpen}
+                onClose={() => setIsEmailFormOpen(false)}
             />
-            <LinkWithIcon
-                href="https://github.com/Oscar-Kvissberg"
-                text="GitHub"
-                icon={<FaGithub className="w-5 h-5 min-w-[1.25rem] min-h-[1.25rem]" />}
-            />
-            <LinkWithIcon
-                href="mailto:oscarkvissberg@gmail.com"
-                text="Email"
-                icon={<HiOutlineMail className="w-5 h-5" />}
-            />
-        </>
+        </div>
     )
 } 
