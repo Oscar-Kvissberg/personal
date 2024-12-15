@@ -24,45 +24,43 @@ export default function Home() {
 
   return (
     <>
-      <div className="fixed inset-0 z-[-1] overflow-hidden">
-        <div className="stars-wrapper">
-          {/* Första container */}
-          <div className="stars-container">
-            {[...Array(100)].map((_, i) => (
-              <div
-                key={`star-1-${i}`}
-                className={`star ${i % 3 === 0
-                  ? 'star-large'
-                  : i % 2 === 0
-                    ? 'star-medium'
-                    : 'star-small'
-                  }`}
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                }}
-              />
-            ))}
-          </div>
+      <div className="stars-container fixed inset-0 z-[-1]">
+        {/* Första container */}
+        <div className="stars-container">
+          {[...Array(100)].map((_, i) => (
+            <div
+              key={`star-1-${i}`}
+              className={`star ${i % 3 === 0
+                ? 'star-large'
+                : i % 2 === 0
+                  ? 'star-medium'
+                  : 'star-small'
+                }`}
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+            />
+          ))}
+        </div>
 
-          {/* Andra container */}
-          <div className="stars-container-2">
-            {[...Array(100)].map((_, i) => (
-              <div
-                key={`star-2-${i}`}
-                className={`star ${i % 3 === 0
-                  ? 'star-large'
-                  : i % 2 === 0
-                    ? 'star-medium'
-                    : 'star-small'
-                  }`}
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                }}
-              />
-            ))}
-          </div>
+        {/* Andra container */}
+        <div className="stars-container-2">
+          {[...Array(100)].map((_, i) => (
+            <div
+              key={`star-2-${i}`}
+              className={`star ${i % 3 === 0
+                ? 'star-large'
+                : i % 2 === 0
+                  ? 'star-medium'
+                  : 'star-small'
+                }`}
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+            />
+          ))}
         </div>
       </div>
 
@@ -75,7 +73,7 @@ export default function Home() {
                 <div className="flex flex-col gap-6">
                   <div className="space-y-2">
                     <h1 className="text-2xl sm:text-4xl font-bold text-white">
-                      Hi Oscar here <span className="hover:wave-animation inline-block cursor-pointer">👋</span>
+                      Hi, <span className="neon-text">Oscar</span> here <span className="hover:wave-animation inline-block cursor-pointer">👋</span>
                     </h1>
                     <p className="text-sm sm:text-base text-white/80">
                       22-year-old student from Sweden
