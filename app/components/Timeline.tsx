@@ -7,13 +7,13 @@ interface TimelineProps {
 
 export default function Timeline({ experience }: TimelineProps) {
     return (
-        <div className="bg-[#030712] border border-white/20 rounded-lg p-6">
+        <div className="border border-white/20 rounded-lg p-6">
             <div className="space-y-8">
                 {experience.map((item, index) => (
                     <div key={index} className="relative pl-16">
                         {/* Logo circle */}
                         <div className="absolute left-0 top-0">
-                            <div className="relative w-12 h-12 overflow-hidden rounded-full bg-[#030712] z-10">
+                            <div className="relative w-12 h-12 overflow-hidden rounded-full bg-black/50 z-10">
                                 <div className="absolute inset-0 rounded-full bg-white/10 border border-white/20" />
                                 <div className="absolute inset-0 flex items-center justify-center">
                                     <Image
