@@ -24,19 +24,46 @@ export default function Home() {
 
   return (
     <>
-      <div className="stars-container fixed inset-0 z-[-1]">
-        {/* Små stjärnor */}
-        {[...Array(30)].map((_, i) => (
-          <div key={`small-${i}`} className="star star-small"></div>
-        ))}
-        {/* Mellanstora stjärnor */}
-        {[...Array(20)].map((_, i) => (
-          <div key={`medium-${i}`} className="star star-medium"></div>
-        ))}
-        {/* Stora stjärnor */}
-        {[...Array(10)].map((_, i) => (
-          <div key={`large-${i}`} className="star star-large"></div>
-        ))}
+      <div className="fixed inset-0 z-[-1] overflow-hidden">
+        <div className="stars-wrapper">
+          {/* Första container */}
+          <div className="stars-container">
+            {[...Array(100)].map((_, i) => (
+              <div
+                key={`star-1-${i}`}
+                className={`star ${i % 3 === 0
+                  ? 'star-large'
+                  : i % 2 === 0
+                    ? 'star-medium'
+                    : 'star-small'
+                  }`}
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Andra container */}
+          <div className="stars-container-2">
+            {[...Array(100)].map((_, i) => (
+              <div
+                key={`star-2-${i}`}
+                className={`star ${i % 3 === 0
+                  ? 'star-large'
+                  : i % 2 === 0
+                    ? 'star-medium'
+                    : 'star-small'
+                  }`}
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+              />
+            ))}
+          </div>
+        </div>
       </div>
 
       <main className="w-full min-h-screen pt-16 lg:pt-24">
