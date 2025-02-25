@@ -6,7 +6,7 @@ import Socials from './components/Socials'
 import Experience from './components/Experience'
 import { HiOutlineDocumentArrowDown } from 'react-icons/hi2'
 import ChatBot from './components/ChatBot'
-import { BsArrowDownRight } from 'react-icons/bs'
+import { BsArrowDown } from 'react-icons/bs'
 import { useRef } from 'react'
 
 export default function Home() {
@@ -88,17 +88,17 @@ export default function Home() {
                       Hi, <span className="text-white">Oscar</span> here <span className="hover:wave-animation inline-block cursor-pointer">👋</span>
                     </h1>
                     <p className="text-sm sm:text-base text-white/80">
-                      22-year-old Industrial Engineering student from Sweden
+                      Industrial Engineering student from Sweden, Stockholm
                     </p>
                     <p className="text-sm sm:text-base text-white/80">
-                      I like to solve problems, drink instant coffee and watch Premier League.
+                    I enjoy solving problems, playing counter strike, and downing instant coffee like it's liquid gold. 
                     </p>
                     <button
                       onClick={handleOpenChat}
                       className="flex items-center gap-2 text-xs sm:text-sm mt-2 group hover:scale-105 transition-transform origin-left"
                     >
                       <span className="neon-text group-hover:text-shadow-strong">Ask the chatbot anything about me</span>
-                      <BsArrowDownRight className="w-4 h-4 sm:w-5 sm:h-5 animate-bounce neon-icon group-hover:filter-strong" />
+                      <BsArrowDown className="w-4 h-4 sm:w-5 sm:h-5 animate-bounce neon-icon group-hover:filter-strong" />
                     </button>
                   </div>
                 </div>
