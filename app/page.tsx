@@ -85,13 +85,13 @@ export default function Home() {
                 <div className="flex flex-col gap-6 min-w-0">
                   <div className="space-y-2">
                     <h1 className="text-2xl sm:text-4xl font-bold text-white truncate">
-                      Hoi Hoi, <span className="text-white">Oscar</span> here <span className="hover:wave-animation inline-block cursor-pointer">👋</span>
+                      Tjena, <span className="text-white">Oscar</span> here <span className="hover:wave-animation inline-block cursor-pointer">👋</span>
                     </h1>
                     <p className="text-sm sm:text-base text-white/80">
-                      Industrial Engineering student from Sweden, Stockholm
+                      Industrial Engineering student from Sweden, Stockholm.
                     </p>
                     <p className="text-sm sm:text-base text-white/80">
-                    I enjoy solving problems, playing counter strike, and downing instant coffee like it&apos;s liquid gold. 
+                    I enjoy solving problems, playing Counter Strike, and downing instant coffee like it&apos;s liquid gold. 
                     </p>
                     <button
                       onClick={handleOpenChat}
