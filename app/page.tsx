@@ -24,6 +24,13 @@ export default function Home() {
 
   return (
     <>
+      {/* Lägg till färgade skuggor före stars */}
+      <div className="fixed inset-0 z-[-2] overflow-hidden">
+        <div className="absolute top-[2%] left-[10%] w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[128px]" />
+        <div className="absolute bottom-[20%] right-[10%] w-[600px] h-[800px] bg-purple-500/20 rounded-full blur-[128px]" />
+        <div className="absolute top-[40%] right-[25%] w-[400px] h-[400px] bg-cyan-500/20 rounded-full blur-[128px]" />
+      </div>
+
       <div className="fixed inset-0 z-[-1] overflow-hidden">
         <div className="stars-wrapper">
           {/* Första container */}
