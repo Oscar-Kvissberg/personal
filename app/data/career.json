@@ -8,7 +8,7 @@
             "endDate": "Present",
             "description": [
                 "Developing a deeper understanding of Supply Chain processes by analyzing and mapping flows, identifying areas for improvement, and creating and refining forecasting models to optimize production and inventory management",
-                "Developed a forecasting tool using machine learning algorithms to improve forecasting accuracy and optimize the supply planning process"
+                "Developed a forecasting tool using machine learning algorithms (Gradient Boosting/XgBoost) to improve forecasting accuracy and optimize the supply planning process"
             ],
             "tags": [
                 "Supply Chain",
