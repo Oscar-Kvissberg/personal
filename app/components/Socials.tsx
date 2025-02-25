@@ -1,6 +1,6 @@
 'use client'
 
-import { FaGithub, FaLinkedin } from 'react-icons/fa'
+import { FaLinkedin } from 'react-icons/fa'
 import { MdEmail } from 'react-icons/md'
 import { useState } from 'react'
 import EmailForm from './EmailForm'
@@ -11,15 +11,6 @@ export default function Socials() {
     return (
         <div className="flex items-center gap-2">
             <div className="flex items-center gap-2">
-                <a
-                    href="https://github.com/Oscar-Kvissberg"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-white/20 text-white neon-button"
-                >
-                    <FaGithub className="w-5 h-5 flex-shrink-0" />
-                    <span className="text-sm">GitHub</span>
-                </a>
                 <a
                     href="https://www.linkedin.com/in/oscar-kvissberg/"
                     target="_blank"
