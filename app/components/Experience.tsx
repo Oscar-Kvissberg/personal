@@ -11,7 +11,7 @@ export default function Experience() {
 
     return (
         <div className="space-y-8">
-            <h2 className="text-2xl font-bold">Experience</h2>
+            
             <TechStack />
 
             <div className="relative isolate">
