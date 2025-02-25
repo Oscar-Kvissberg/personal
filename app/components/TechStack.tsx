@@ -36,7 +36,7 @@ const technologies = [
 
 export default function TechStack() {
     return (
-        <div className="border border-white/20 rounded-lg p-6">
+        <div className="border border-white/20 rounded-lg p-6 relative z-[0]">
             <h2 className="text-xl font-bold text-white mb-4">Technical Competences</h2>
             <div className="flex flex-wrap gap-4">
                 {technologies.map((tech) => (

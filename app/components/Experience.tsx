@@ -11,24 +11,27 @@ export default function Experience() {
 
     return (
         <div className="space-y-8">
+            <h2 className="text-2xl font-bold">Experience</h2>
             <TechStack />
 
-            <Tabs defaultValue="work" className="bg-transparent">
-                <TabsList className="mb-2 grid w-full grid-cols-2 bg-transparent">
-                    <TabsTrigger value="work" className="bg-transparent">Work</TabsTrigger>
-                    <TabsTrigger value="education" className="bg-transparent">Education</TabsTrigger>
-                </TabsList>
-                <TabsContent value="work" className="bg-transparent">
-                    <div className="bg-transparent">
-                        <Timeline experience={career}></Timeline>
-                    </div>
-                </TabsContent>
-                <TabsContent value="education" className="bg-transparent">
-                    <div className="bg-transparent">
-                        <Timeline experience={education}></Timeline>
-                    </div>
-                </TabsContent>
-            </Tabs>
+            <div className="relative isolate">
+                <Tabs defaultValue="work" className="bg-transparent">
+                    <TabsList className="mb-2 grid w-full grid-cols-2 bg-transparent">
+                        <TabsTrigger value="work" className="bg-transparent">Work</TabsTrigger>
+                        <TabsTrigger value="education" className="bg-transparent">Education</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="work" className="bg-transparent">
+                        <div className="bg-transparent">
+                            <Timeline experience={career}></Timeline>
+                        </div>
+                    </TabsContent>
+                    <TabsContent value="education" className="bg-transparent">
+                        <div className="bg-transparent">
+                            <Timeline experience={education}></Timeline>
+                        </div>
+                    </TabsContent>
+                </Tabs>
+            </div>
         </div>
     );
 }

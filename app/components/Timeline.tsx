@@ -7,7 +7,7 @@ interface TimelineProps {
 
 export default function Timeline({ experience }: TimelineProps) {
     return (
-        <div className="border border-white/20 rounded-lg p-6">
+        <div className="border border-white/20 rounded-lg p-6 relative z-[1]">
             <div className="space-y-8">
                 {experience.map((item, index) => (
                     <div key={index} className="relative pl-16">

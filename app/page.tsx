@@ -24,13 +24,14 @@ export default function Home() {
 
   return (
     <>
-      {/* Lägg till färgade skuggor före stars */}
+      {/* Bakgrundsskuggor */}
       <div className="fixed inset-0 z-[-2] overflow-hidden">
         <div className="absolute top-[2%] left-[10%] w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[128px]" />
         <div className="absolute bottom-[20%] right-[10%] w-[600px] h-[800px] bg-purple-500/20 rounded-full blur-[128px]" />
         <div className="absolute top-[40%] right-[25%] w-[400px] h-[400px] bg-cyan-500/20 rounded-full blur-[128px]" />
       </div>
 
+      {/* Stjärnor */}
       <div className="fixed inset-0 z-[-1] overflow-hidden">
         <div className="stars-wrapper">
           {/* Första container */}
@@ -73,10 +74,11 @@ export default function Home() {
         </div>
       </div>
 
-      <main className="w-full min-h-screen pt-16 lg:pt-24">
+      {/* Sätt ett lågt z-index på main content */}
+      <main className="w-full min-h-screen pt-16 lg:pt-24 relative z-[1]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-0">
-          {/* Vänster kolumn - Fixed position */}
-          <div className="lg:fixed lg:w-[50%] min-h-fit lg:h-screen p-4 sm:p-8 lg:pt-0">
+          {/* Vänster kolumn */}
+          <div className="lg:fixed lg:w-[50%] min-h-fit lg:h-screen p-4 sm:p-8 lg:pt-0 relative z-[1]">
             <div className="max-w-xl mx-auto">
               <div className="grid grid-cols-[140px,minmax(0,1fr)] gap-4 sm:gap-8">
                 <div className="w-[120px] sm:w-[140px] flex-shrink-0">
@@ -123,15 +125,19 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Höger kolumn - Scrollable content */}
-          <div className="lg:col-start-2 p-4 sm:p-8 lg:pt-0">
+          {/* Höger kolumn */}
+          <div className="lg:col-start-2 p-4 sm:p-8 lg:pt-0 relative z-[1]">
             <div className="max-w-xl lg:max-w-3xl mx-auto">
               <Experience />
             </div>
           </div>
         </div>
       </main>
-      <ChatBot onOpenChat={setOpenChatRef} />
+
+      {/* Lägg till en portal-container för modaler */}
+      <div id="modal-root" className="relative z-[9999]">
+        <ChatBot onOpenChat={setOpenChatRef} />
+      </div>
     </>
   )
 }
