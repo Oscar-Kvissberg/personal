@@ -28,9 +28,10 @@ export async function POST(request: NextRequest) {
     const formData = await request.formData()
     const packingFile = formData.get('packingFile') as File
     const orderFile = formData.get('orderFile') as File
+    const quantityFile = formData.get('quantityFile') as File
     
-    if (!packingFile || !orderFile) {
-      return NextResponse.json({ error: 'Båda filerna krävs' }, { status: 400 })
+    if (!packingFile || !orderFile || !quantityFile) {
+      return NextResponse.json({ error: 'Alla tre filer krävs' }, { status: 400 })
     }
 
     // Läs orderfilen först för att få order numbers
@@ -139,31 +140,75 @@ export async function POST(request: NextRequest) {
 
     console.log('Final box mappings:', Object.fromEntries(boxMappings))
 
-    // Uppdatera convertedData för att inkludera box number
+    // Läs kvantitetsfilen för att få rätt kvantiteter
+    const quantityBytes = await quantityFile.arrayBuffer()
+    const quantityWorkbook = XLSX.read(quantityBytes, { type: 'array' })
+    const quantitySheet = quantityWorkbook.Sheets[quantityWorkbook.SheetNames[0]]
+
+    // Skapa en map för att lagra EAN -> kvantitet
+    const quantityMap = new Map<string, string>()
+
+    // Läs igenom kvantitetsfilen
+    const quantityRange = XLSX.utils.decode_range(quantitySheet['!ref'] || 'A1')
+    
+    console.log('Reading quantity file...')
+    console.log('Sheet range:', quantityRange)
+    console.log('Merged cells:', quantitySheet['!merges'])
+
+    // Gå igenom varje rad
+    for (let row = quantityRange.s.r; row <= quantityRange.e.r; row++) {
+      // Försök hitta EAN i de mergade kolumnerna (T-AC)
+      let ean = ''
+      
+      // Kolla först kolumn T (index 19)
+      const cellT = quantitySheet[XLSX.utils.encode_cell({ r: row, c: 19 })]
+      if (cellT?.v) {
+        const value = cellT.v.toString().trim()
+        if (value.match(/^\d{13}$/)) {
+          ean = value
+          console.log(`Found EAN in column T: ${ean} at row ${row + 1}`)
+        }
+      }
+
+      if (ean) {
+        // Om vi hittade ett EAN, läs kvantiteten från AD (index 29)
+        const quantityCell = quantitySheet[XLSX.utils.encode_cell({ r: row, c: 29 })]
+        if (quantityCell?.v) {
+          const quantity = quantityCell.v.toString().trim()
+          console.log(`Found quantity for EAN ${ean}: ${quantity} at row ${row + 1}`)
+          quantityMap.set(ean, quantity)
+        } else {
+          console.log(`No quantity found for EAN ${ean} at row ${row + 1}`)
+        }
+      }
+    }
+
+    console.log('Final Quantity mappings:', Object.fromEntries(quantityMap))
+
+    // Uppdatera convertedData för att använda kvantiteter från den nya filen
     const convertedData = jsonData
-      .filter(row => row['AJ'] || row['AK'] || row['AL'] || row['AM'] || row['AN'] || row['AO'] || row['AP'])
+      .filter(row => {
+        const ean = (row['AJ'] || row['AK'] || row['AL'] || row['AM'] || row['AN'] || row['AO'] || row['AP'])?.toString().trim()
+        return ean && ean.match(/^\d{13}$/)
+      })
       .map((row) => {
         const ean = (row['AJ'] || row['AK'] || row['AL'] || row['AM'] || row['AN'] || row['AO'] || row['AP']).toString().trim()
-        const quantity = row['AQ'] || row['AR'] || row['AS']
-
-        if (ean && quantity) {
-          const boxNo = boxMappings.get(ean)
-          console.log(`Processing EAN: ${ean}, Box No: ${boxNo}`)
-          
-          return {
-            'Dispatch Advice form': dispatchAdviceNumber,
-            'EAN Code': ean,
-            'Quantity dispatched': quantity.toString().trim(),
-            'Purchase order number': dispatchAdviceNumber,
-            'Boozt Purchase number': booztPurchaseNumber,
-            'Dispatch Date': formatDate(today),
-            'Scheduled Arrival Date': formatDate(nextWorkDay),
-            'Box No.': boxNo || ''
-          }
+        const boxNo = boxMappings.get(ean)
+        const quantity = quantityMap.get(ean)
+        
+        console.log(`Processing EAN: ${ean}, Found quantity: ${quantity}, Box: ${boxNo}`)
+        
+        return {
+          'Dispatch Advice form': dispatchAdviceNumber,
+          'EAN Code': ean,
+          'Quantity dispatched': quantity || '0',
+          'Purchase order number': dispatchAdviceNumber,
+          'Boozt Purchase number': booztPurchaseNumber,
+          'Dispatch Date': formatDate(today),
+          'Scheduled Arrival Date': formatDate(nextWorkDay),
+          'Box No.': boxNo || ''
         }
-        return null
       })
-      .filter(row => row !== null)
 
     console.log('Converted data:', convertedData)
 

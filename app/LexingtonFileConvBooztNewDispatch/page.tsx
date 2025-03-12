@@ -4,20 +4,21 @@ import React, { useState, useRef, DragEvent } from 'react'
 const LexingtonFileConverterBooztNewDispatch = () => {
   const [packingFile, setPackingFile] = useState<File | null>(null)
   const [orderFile, setOrderFile] = useState<File | null>(null)
+  const [quantityFile, setQuantityFile] = useState<File | null>(null)
   const [isLoading, setIsLoading] = useState(false)
-  const [dragOver, setDragOver] = useState({ packing: false, order: false })
+  const [dragOver, setDragOver] = useState({ packing: false, order: false, quantity: false })
 
-  const handleDragOver = (e: DragEvent, type: 'packing' | 'order') => {
+  const handleDragOver = (e: DragEvent, type: 'packing' | 'order' | 'quantity') => {
     e.preventDefault()
     setDragOver(prev => ({ ...prev, [type]: true }))
   }
 
-  const handleDragLeave = (e: DragEvent, type: 'packing' | 'order') => {
+  const handleDragLeave = (e: DragEvent, type: 'packing' | 'order' | 'quantity') => {
     e.preventDefault()
     setDragOver(prev => ({ ...prev, [type]: false }))
   }
 
-  const handleDrop = (e: DragEvent, type: 'packing' | 'order') => {
+  const handleDrop = (e: DragEvent, type: 'packing' | 'order' | 'quantity') => {
     e.preventDefault()
     setDragOver(prev => ({ ...prev, [type]: false }))
 
@@ -26,22 +27,26 @@ const LexingtonFileConverterBooztNewDispatch = () => {
         droppedFile.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')) {
       if (type === 'packing') {
         setPackingFile(droppedFile)
-      } else {
+      } else if (type === 'order') {
         setOrderFile(droppedFile)
+      } else {
+        setQuantityFile(droppedFile)
       }
     } else {
       alert('Var god välj en giltig Excel-fil (.xls eller .xlsx)')
     }
   }
 
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>, type: 'packing' | 'order') => {
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>, type: 'packing' | 'order' | 'quantity') => {
     const uploadedFile = event.target.files?.[0]
     if (uploadedFile && (uploadedFile.type === 'application/vnd.ms-excel' || 
         uploadedFile.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')) {
       if (type === 'packing') {
         setPackingFile(uploadedFile)
-      } else {
+      } else if (type === 'order') {
         setOrderFile(uploadedFile)
+      } else {
+        setQuantityFile(uploadedFile)
       }
     } else {
       alert('Var god välj en giltig Excel-fil (.xls eller .xlsx)')
@@ -49,8 +54,8 @@ const LexingtonFileConverterBooztNewDispatch = () => {
   }
 
   const handleConversion = async () => {
-    if (!packingFile || !orderFile) {
-      alert('Var god välj båda filerna först')
+    if (!packingFile || !orderFile || !quantityFile) {
+      alert('Var god välj alla tre filer först')
       return
     }
 
@@ -59,6 +64,7 @@ const LexingtonFileConverterBooztNewDispatch = () => {
       const formData = new FormData()
       formData.append('packingFile', packingFile)
       formData.append('orderFile', orderFile)
+      formData.append('quantityFile', quantityFile)
 
       const response = await fetch('/api/convert-excel', {
         method: 'POST',
@@ -160,9 +166,40 @@ const LexingtonFileConverterBooztNewDispatch = () => {
           )}
         </div>
 
+        {/* New Quantity File Upload */}
+        <div 
+          className={`border-2 border-dashed rounded-lg p-8 text-center
+            ${dragOver.quantity ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}`}
+          onDragOver={(e) => handleDragOver(e, 'quantity')}
+          onDragLeave={(e) => handleDragLeave(e, 'quantity')}
+          onDrop={(e) => handleDrop(e, 'quantity')}
+        >
+          <input
+            type="file"
+            accept=".xls,.xlsx"
+            onChange={(e) => handleFileUpload(e, 'quantity')}
+            className="hidden"
+            id="quantity-file-upload"
+          />
+          <label 
+            htmlFor="quantity-file-upload"
+            className="cursor-pointer text-blue-600 hover:text-blue-800"
+          >
+            Klicka för att välja Kvantitetsfil
+          </label>
+          <p className="mt-2 text-sm text-gray-500">
+            eller dra och släpp filen här
+          </p>
+          {quantityFile && (
+            <p className="mt-2 text-gray-600">
+              Kvantitetsfil: {quantityFile.name}
+            </p>
+          )}
+        </div>
+
         <button
           onClick={handleConversion}
-          disabled={!packingFile || !orderFile || isLoading}
+          disabled={!packingFile || !orderFile || !quantityFile || isLoading}
           className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isLoading ? 'Konverterar...' : 'Konvertera filer'}

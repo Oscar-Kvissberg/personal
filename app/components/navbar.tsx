@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { useState } from 'react'
 import Image from 'next/image'
-import { UserCircleIcon, RocketLaunchIcon, CakeIcon } from '@heroicons/react/24/outline'
+import { UserCircleIcon, RocketLaunchIcon, CakeIcon, CreditCardIcon } from '@heroicons/react/24/outline'
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -97,7 +97,15 @@ const Navbar = () => {
                             className="text-gray-200 hover:text-white transition-colors flex items-center gap-3"
                         >
                             <RocketLaunchIcon className="w-5 h-5" />
-                            Con. Lex. Boozt New Dispatch
+                            Lexington Boozt New Dispatch
+                        </Link>
+                        <Link
+                            href="/LexingtonFileConvBooztInvoice"
+                            onClick={() => setIsOpen(false)}
+                            className="text-gray-200 hover:text-white transition-colors flex items-center gap-3"
+                        >
+                            <CreditCardIcon className="w-5 h-5" />
+                            Lexington Boozt Invoice
                         </Link>
                     </div>
                 </div>
