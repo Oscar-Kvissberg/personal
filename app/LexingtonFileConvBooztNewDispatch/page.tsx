@@ -185,7 +185,7 @@ const LexingtonFileConverterBooztNewDispatch = () => {
             htmlFor="quantity-file-upload"
             className="cursor-pointer text-blue-600 hover:text-blue-800"
           >
-            Klicka för att välja Kvantitetsfil
+            Klicka för att välja Faktura
           </label>
           <p className="mt-2 text-sm text-gray-500">
             eller dra och släpp filen här
