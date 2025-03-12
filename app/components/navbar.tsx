@@ -91,6 +91,14 @@ const Navbar = () => {
                             <ChartBarIcon className="w-5 h-5" />
                             Fantasy Premier League
                         </Link>
+                        <Link
+                            href="/LexingtonFileConv"
+                            onClick={() => setIsOpen(false)}
+                            className="text-gray-200 hover:text-white transition-colors flex items-center gap-3"
+                        >
+                            <ChartBarIcon className="w-5 h-5" />
+                            File Converter Lexington
+                        </Link>
                     </div>
                 </div>
             </nav>
