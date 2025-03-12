@@ -100,7 +100,7 @@ export default function Home() {
                       Industrial Engineering student from Sweden, Stockholm.
                     </p>
                     <p className="text-sm sm:text-base text-white/80">
-                    I enjoy solving problems, playing Counter Strike, and downing instant coffee like it&apos;s liquid gold. 
+                    I enjoy solving problems, playing Counter Strike 2, and downing instant coffee like it&apos;s liquid gold. 
                     </p>
                     <button
                       onClick={handleOpenChat}
