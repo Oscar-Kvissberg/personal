@@ -198,11 +198,8 @@ export async function POST(request: NextRequest) {
         pattern: 'solid',
         fgColor: { argb: 'FFFFFF00' }
       }
-      cell.font = {
-        bold: true
-      }
       cell.alignment = {
-        horizontal: 'center'
+        horizontal: 'left'
       }
     })
 
