@@ -1,26 +1,48 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useRef, DragEvent } from 'react'
 
 const LexingtonFileConverter = () => {
   const [packingFile, setPackingFile] = useState<File | null>(null)
   const [orderFile, setOrderFile] = useState<File | null>(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [dragOver, setDragOver] = useState({ packing: false, order: false })
 
-  const handlePackingFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const uploadedFile = event.target.files?.[0]
-    if (uploadedFile && uploadedFile.type === 'application/vnd.ms-excel' || 
-        uploadedFile?.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
-      setPackingFile(uploadedFile)
+  const handleDragOver = (e: DragEvent, type: 'packing' | 'order') => {
+    e.preventDefault()
+    setDragOver(prev => ({ ...prev, [type]: true }))
+  }
+
+  const handleDragLeave = (e: DragEvent, type: 'packing' | 'order') => {
+    e.preventDefault()
+    setDragOver(prev => ({ ...prev, [type]: false }))
+  }
+
+  const handleDrop = (e: DragEvent, type: 'packing' | 'order') => {
+    e.preventDefault()
+    setDragOver(prev => ({ ...prev, [type]: false }))
+
+    const droppedFile = e.dataTransfer.files[0]
+    if (droppedFile && (droppedFile.type === 'application/vnd.ms-excel' || 
+        droppedFile.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')) {
+      if (type === 'packing') {
+        setPackingFile(droppedFile)
+      } else {
+        setOrderFile(droppedFile)
+      }
     } else {
       alert('Var god välj en giltig Excel-fil (.xls eller .xlsx)')
     }
   }
 
-  const handleOrderFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>, type: 'packing' | 'order') => {
     const uploadedFile = event.target.files?.[0]
-    if (uploadedFile && uploadedFile.type === 'application/vnd.ms-excel' || 
-        uploadedFile?.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
-      setOrderFile(uploadedFile)
+    if (uploadedFile && (uploadedFile.type === 'application/vnd.ms-excel' || 
+        uploadedFile.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')) {
+      if (type === 'packing') {
+        setPackingFile(uploadedFile)
+      } else {
+        setOrderFile(uploadedFile)
+      }
     } else {
       alert('Var god välj en giltig Excel-fil (.xls eller .xlsx)')
     }
@@ -47,11 +69,17 @@ const LexingtonFileConverter = () => {
         throw new Error('Konvertering misslyckades')
       }
 
+      // Hämta filnamnet från Content-Disposition header
+      const contentDisposition = response.headers.get('Content-Disposition')
+      const filename = contentDisposition
+        ? contentDisposition.split('filename=')[1].replace(/"/g, '')
+        : 'converted.xlsx'
+
       const blob = await response.blob()
       const url = window.URL.createObjectURL(blob)
       const a = document.createElement('a')
       a.href = url
-      a.download = 'converted.xlsx'
+      a.download = filename  // Använder filnamnet från servern
       document.body.appendChild(a)
       a.click()
       window.URL.revokeObjectURL(url)
@@ -71,11 +99,17 @@ const LexingtonFileConverter = () => {
       
       <div className="space-y-4">
         {/* Packing List File Upload */}
-        <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+        <div 
+          className={`border-2 border-dashed rounded-lg p-8 text-center
+            ${dragOver.packing ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}`}
+          onDragOver={(e) => handleDragOver(e, 'packing')}
+          onDragLeave={(e) => handleDragLeave(e, 'packing')}
+          onDrop={(e) => handleDrop(e, 'packing')}
+        >
           <input
             type="file"
             accept=".xls,.xlsx"
-            onChange={handlePackingFileUpload}
+            onChange={(e) => handleFileUpload(e, 'packing')}
             className="hidden"
             id="packing-file-upload"
           />
@@ -85,6 +119,9 @@ const LexingtonFileConverter = () => {
           >
             Klicka för att välja Packing List fil
           </label>
+          <p className="mt-2 text-sm text-gray-500">
+            eller dra och släpp filen här
+          </p>
           {packingFile && (
             <p className="mt-2 text-gray-600">
               Packing List: {packingFile.name}
@@ -93,11 +130,17 @@ const LexingtonFileConverter = () => {
         </div>
 
         {/* Order File Upload */}
-        <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+        <div 
+          className={`border-2 border-dashed rounded-lg p-8 text-center
+            ${dragOver.order ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}`}
+          onDragOver={(e) => handleDragOver(e, 'order')}
+          onDragLeave={(e) => handleDragLeave(e, 'order')}
+          onDrop={(e) => handleDrop(e, 'order')}
+        >
           <input
             type="file"
             accept=".xls,.xlsx"
-            onChange={handleOrderFileUpload}
+            onChange={(e) => handleFileUpload(e, 'order')}
             className="hidden"
             id="order-file-upload"
           />
@@ -107,6 +150,9 @@ const LexingtonFileConverter = () => {
           >
             Klicka för att välja Order fil
           </label>
+          <p className="mt-2 text-sm text-gray-500">
+            eller dra och släpp filen här
+          </p>
           {orderFile && (
             <p className="mt-2 text-gray-600">
               Order fil: {orderFile.name}

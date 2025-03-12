@@ -225,7 +225,7 @@ export async function POST(request: NextRequest) {
 
     return new NextResponse(buffer, {
       headers: {
-        'Content-Disposition': `attachment; filename="converted_${formatDate(new Date())}.xlsx"`,
+        'Content-Disposition': `attachment; filename="${booztPurchaseNumber}.xlsx"`,
         'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
       },
     })
