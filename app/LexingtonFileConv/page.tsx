@@ -94,8 +94,8 @@ const LexingtonFileConverter = () => {
   }
 
   return (
-    <div className="container mx-auto p-8">
-      <h1 className="text-2xl font-bold mb-6">Lexington Filkonverterare</h1>
+    <div className="container mx-auto p-8 mt-20">
+      <h1 className="text-2xl font-bold mb-6">Skapa Batch för att ladda upp till Boozt</h1>
       
       <div className="space-y-4">
         {/* Packing List File Upload */}
@@ -117,7 +117,7 @@ const LexingtonFileConverter = () => {
             htmlFor="packing-file-upload"
             className="cursor-pointer text-blue-600 hover:text-blue-800"
           >
-            Klicka för att välja Packing List fil
+            Klicka för att välja Packing List fil (P)
           </label>
           <p className="mt-2 text-sm text-gray-500">
             eller dra och släpp filen här
@@ -148,7 +148,7 @@ const LexingtonFileConverter = () => {
             htmlFor="order-file-upload"
             className="cursor-pointer text-blue-600 hover:text-blue-800"
           >
-            Klicka för att välja Order fil
+            Klicka för att välja Order fil (F)
           </label>
           <p className="mt-2 text-sm text-gray-500">
             eller dra och släpp filen här
