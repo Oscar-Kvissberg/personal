@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useRef, DragEvent } from 'react'
 
-const LexingtonFileConverter = () => {
+const LexingtonFileConverterBooztNewDispatch = () => {
   const [packingFile, setPackingFile] = useState<File | null>(null)
   const [orderFile, setOrderFile] = useState<File | null>(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -172,4 +172,4 @@ const LexingtonFileConverter = () => {
   )
 }
 
-export default LexingtonFileConverter
+export default LexingtonFileConverterBooztNewDispatch
