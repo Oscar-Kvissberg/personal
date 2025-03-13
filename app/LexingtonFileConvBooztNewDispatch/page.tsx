@@ -121,7 +121,7 @@ const LexingtonFileConverterBooztNewDispatch = () => {
           />
           <label 
             htmlFor="packing-file-upload"
-            className="cursor-pointer text-[#03e9f4] transition-all duration-300"
+            className="cursor-pointer text-[#03e9f4] transition-all duration-300 hover:scale-110 inline-block"
           >
             Klicka för att välja Packing List fil (P)
           </label>
@@ -152,7 +152,7 @@ const LexingtonFileConverterBooztNewDispatch = () => {
           />
           <label 
             htmlFor="order-file-upload"
-            className="cursor-pointer text-[#03e9f4] transition-all duration-300"
+            className="cursor-pointer text-[#03e9f4] transition-all duration-300 hover:scale-110 inline-block"
           >
             Klicka för att välja Order fil (F)
           </label>
@@ -183,7 +183,7 @@ const LexingtonFileConverterBooztNewDispatch = () => {
           />
           <label 
             htmlFor="quantity-file-upload"
-            className="cursor-pointer text-[#03e9f4] transition-all duration-300"
+            className="cursor-pointer text-[#03e9f4] transition-all duration-300 hover:scale-110 inline-block"
           >
             Klicka för att välja Faktura
           </label>
@@ -202,7 +202,7 @@ const LexingtonFileConverterBooztNewDispatch = () => {
           disabled={!packingFile || !orderFile || !quantityFile || isLoading}
           className={`w-full font-bold py-2 px-4 rounded transition-all duration-300
             ${(!packingFile || !orderFile || !quantityFile || isLoading) 
-              ? 'bg-blue-600 opacity-50 cursor-not-allowed' 
+              ? 'bg-black text-white border-2 border-white/40 opacity-50 cursor-not-allowed' 
               : 'bg-[#03e9f4] text-[#050801] shadow-[0_0_5px_#03e9f4,0_0_25px_#03e9f4,0_0_50px_#03e9f4,0_0_200px_#03e9f4] hover:shadow-[0_0_5px_#03e9f4,0_0_25px_#03e9f4,0_0_100px_#03e9f4,0_0_300px_#03e9f4] hover:scale-[1.02]'}`}
         >
           {isLoading ? 'Konverterar...' : 'Konvertera filer'}
