@@ -9,8 +9,8 @@ export async function POST(request: NextRequest) {
     const dispatchSuffix = formData.get('dispatchSuffix') as string
     const invoiceNumber = formData.get('invoiceNumber') as string
     
-    if (!invoiceFile || !dispatchSuffix || !invoiceNumber) {
-      return NextResponse.json({ error: 'Alla fält krävs' }, { status: 400 })
+    if (!invoiceFile || !invoiceNumber) {
+      return NextResponse.json({ error: 'Fil och fakturanummer krävs' }, { status: 400 })
     }
 
     // Läs input-filen
@@ -29,7 +29,10 @@ export async function POST(request: NextRequest) {
 
     // Ta bort header-raden och konvertera data till nytt format
     const data = jsonData.slice(1).map(row => ({
-      'Dispatch advice number': `${row['A']}-${dispatchSuffix}`,  // Lägg till suffix
+      // Lägg bara till suffix om det finns och inte är 0 eller tomt
+      'Dispatch advice number': dispatchSuffix && dispatchSuffix !== '0' 
+        ? `${row['A']}-${dispatchSuffix}`
+        : row['A'],
       'Supplier order number': row['A'],
       'Boozt order number': row['E'],
       'EAN code': row['B'],

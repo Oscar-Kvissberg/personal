@@ -47,8 +47,8 @@ const LexingtonFileConvBooztInvoice = () => {
       return
     }
 
-    if (!dispatchSuffix || !invoiceNumber) {
-      alert('Var god fyll i både suffix-nummer och fakturanummer')
+    if (!invoiceNumber) {
+      alert('Var god fyll i fakturanummer')
       return
     }
 
@@ -134,6 +134,7 @@ const LexingtonFileConvBooztInvoice = () => {
             </label>
             <input
               type="number"
+              min="0"
               value={dispatchSuffix}
               onChange={(e) => setDispatchSuffix(e.target.value)}
               className="w-full px-3 py-2 bg-black border-2 border-white/40 rounded text-white focus:border-[#03e9f4] focus:outline-none transition-colors"
@@ -157,9 +158,9 @@ const LexingtonFileConvBooztInvoice = () => {
 
         <button
           onClick={handleConversion}
-          disabled={!invoiceFile || !dispatchSuffix || !invoiceNumber || isLoading}
+          disabled={!invoiceFile || !invoiceNumber || isLoading}
           className={`w-full font-bold py-2 px-4 rounded transition-all duration-300
-            ${(!invoiceFile || !dispatchSuffix || !invoiceNumber || isLoading) 
+            ${(!invoiceFile || !invoiceNumber || isLoading) 
               ? 'bg-black text-white border-2 border-white/40 opacity-50 cursor-not-allowed' 
               : 'bg-[#03e9f4] text-[#050801] shadow-[0_0_5px_#03e9f4,0_0_25px_#03e9f4,0_0_50px_#03e9f4,0_0_200px_#03e9f4] hover:shadow-[0_0_5px_#03e9f4,0_0_25px_#03e9f4,0_0_100px_#03e9f4,0_0_300px_#03e9f4] hover:scale-[1.02]'}`}
         >
