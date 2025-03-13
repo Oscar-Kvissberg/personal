@@ -121,7 +121,7 @@ const LexingtonFileConverterBooztNewDispatch = () => {
           />
           <label 
             htmlFor="packing-file-upload"
-            className="cursor-pointer text-blue-600 hover:text-blue-800"
+            className="cursor-pointer text-[#03e9f4] transition-all duration-300"
           >
             Klicka för att välja Packing List fil (P)
           </label>
@@ -152,7 +152,7 @@ const LexingtonFileConverterBooztNewDispatch = () => {
           />
           <label 
             htmlFor="order-file-upload"
-            className="cursor-pointer text-blue-600 hover:text-blue-800"
+            className="cursor-pointer text-[#03e9f4] transition-all duration-300"
           >
             Klicka för att välja Order fil (F)
           </label>
@@ -166,7 +166,7 @@ const LexingtonFileConverterBooztNewDispatch = () => {
           )}
         </div>
 
-        {/* New Quantity File Upload */}
+        {/* Quantity File Upload */}
         <div 
           className={`border-2 border-dashed rounded-lg p-8 text-center
             ${dragOver.quantity ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}`}
@@ -183,7 +183,7 @@ const LexingtonFileConverterBooztNewDispatch = () => {
           />
           <label 
             htmlFor="quantity-file-upload"
-            className="cursor-pointer text-blue-600 hover:text-blue-800"
+            className="cursor-pointer text-[#03e9f4] transition-all duration-300"
           >
             Klicka för att välja Faktura
           </label>
@@ -200,7 +200,10 @@ const LexingtonFileConverterBooztNewDispatch = () => {
         <button
           onClick={handleConversion}
           disabled={!packingFile || !orderFile || !quantityFile || isLoading}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+          className={`w-full font-bold py-2 px-4 rounded transition-all duration-300
+            ${(!packingFile || !orderFile || !quantityFile || isLoading) 
+              ? 'bg-blue-600 opacity-50 cursor-not-allowed' 
+              : 'bg-[#03e9f4] text-[#050801] shadow-[0_0_5px_#03e9f4,0_0_25px_#03e9f4,0_0_50px_#03e9f4,0_0_200px_#03e9f4] hover:shadow-[0_0_5px_#03e9f4,0_0_25px_#03e9f4,0_0_100px_#03e9f4,0_0_300px_#03e9f4] hover:scale-[1.02]'}`}
         >
           {isLoading ? 'Konverterar...' : 'Konvertera filer'}
         </button>

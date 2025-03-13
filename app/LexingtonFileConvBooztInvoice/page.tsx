@@ -85,7 +85,7 @@ const LexingtonFileConvBooztInvoice = () => {
 
   return (
     <div className="container mx-auto p-8 mt-20">
-      <h1 className="text-2xl font-bold mb-6">Konvertera Faktura till Boozt Format</h1>
+      <h1 className="text-2xl font-bold mb-6">Konvertera Dispatch till faktura format för uppladdning i Boozt portal</h1>
       
       <div className="space-y-4">
         <div 
@@ -104,16 +104,16 @@ const LexingtonFileConvBooztInvoice = () => {
           />
           <label 
             htmlFor="invoice-file-upload"
-            className="cursor-pointer text-blue-600 hover:text-blue-800"
+            className="cursor-pointer text-[#03e9f4] transition-all duration-300"
           >
-            Klicka för att välja Fakturafil
+            Klicka för att välja Dispatch fil
           </label>
           <p className="mt-2 text-sm text-gray-500">
             eller dra och släpp filen här
           </p>
           {invoiceFile && (
             <p className="mt-2 text-gray-600">
-              Fakturafil: {invoiceFile.name}
+              Dispatch fil: {invoiceFile.name}
             </p>
           )}
         </div>
@@ -121,7 +121,10 @@ const LexingtonFileConvBooztInvoice = () => {
         <button
           onClick={handleConversion}
           disabled={!invoiceFile || isLoading}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+          className={`w-full font-bold py-2 px-4 rounded transition-all duration-300
+            ${(!invoiceFile || isLoading) 
+              ? 'bg-blue-600 opacity-50 cursor-not-allowed' 
+              : 'bg-[#03e9f4] text-[#050801] shadow-[0_0_5px_#03e9f4,0_0_25px_#03e9f4,0_0_50px_#03e9f4,0_0_200px_#03e9f4] hover:shadow-[0_0_5px_#03e9f4,0_0_25px_#03e9f4,0_0_100px_#03e9f4,0_0_300px_#03e9f4] hover:scale-[1.02]'}`}
         >
           {isLoading ? 'Konverterar...' : 'Konvertera fil'}
         </button>
