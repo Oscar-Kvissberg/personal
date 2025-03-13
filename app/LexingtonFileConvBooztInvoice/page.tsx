@@ -94,7 +94,7 @@ const LexingtonFileConvBooztInvoice = () => {
 
   return (
     <div className="container mx-auto p-8 mt-20">
-      <h1 className="text-2xl font-bold mb-6">Konvertera Dispatch till faktura format för uppladdning i Boozt portal</h1>
+      <h1 className="text-2xl font-bold mb-6">Konvertera Dispatch till fakturaformat för uppladdning i Booztportal</h1>
       
       <div className="space-y-4">
         <div 
@@ -151,7 +151,7 @@ const LexingtonFileConvBooztInvoice = () => {
               value={invoiceNumber}
               onChange={(e) => setInvoiceNumber(e.target.value)}
               className="w-full px-3 py-2 bg-black border-2 border-white/40 rounded text-white focus:border-[#03e9f4] focus:outline-none transition-colors"
-              placeholder="Ange fakturanummer"
+              placeholder="e.g. SESI3948257 (Obligatorisk)"
             />
           </div>
         </div>

@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { useState } from 'react'
 import Image from 'next/image'
-import { UserCircleIcon, RocketLaunchIcon, CakeIcon, CreditCardIcon } from '@heroicons/react/24/outline'
+import { UserCircleIcon, RocketLaunchIcon, CakeIcon, CreditCardIcon, RectangleGroupIcon } from '@heroicons/react/24/outline'
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -106,6 +106,14 @@ const Navbar = () => {
                         >
                             <CreditCardIcon className="w-5 h-5" />
                             Lexington Boozt Invoice
+                        </Link>
+                        <Link
+                            href="/LexingtonFileConvIllumInvoiceSegmentation"
+                            onClick={() => setIsOpen(false)}
+                            className="text-gray-200 hover:text-white transition-colors flex items-center gap-3"
+                        >
+                            <RectangleGroupIcon className="w-5 h-5" />
+                            Lexington Illum Inv. Seg.
                         </Link>
                     </div>
                 </div>
