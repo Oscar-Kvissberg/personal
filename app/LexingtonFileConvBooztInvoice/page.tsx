@@ -130,7 +130,7 @@ const LexingtonFileConvBooztInvoice = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
             <label className="block text-[#03e9f4] text-sm">
-              Internt nummer för Dispatch Advice Number (hur många restorders...)
+              Internt nummer för Dispatch Advice Number (Hur många restorders?...)
             </label>
             <input
               type="number"
