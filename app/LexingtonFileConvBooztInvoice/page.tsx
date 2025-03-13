@@ -5,6 +5,8 @@ const LexingtonFileConvBooztInvoice = () => {
   const [invoiceFile, setInvoiceFile] = useState<File | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [dragOver, setDragOver] = useState(false)
+  const [dispatchSuffix, setDispatchSuffix] = useState('')
+  const [invoiceNumber, setInvoiceNumber] = useState('')
 
   const handleDragOver = (e: DragEvent) => {
     e.preventDefault()
@@ -45,10 +47,17 @@ const LexingtonFileConvBooztInvoice = () => {
       return
     }
 
+    if (!dispatchSuffix || !invoiceNumber) {
+      alert('Var god fyll i både suffix-nummer och fakturanummer')
+      return
+    }
+
     setIsLoading(true)
     try {
       const formData = new FormData()
       formData.append('invoiceFile', invoiceFile)
+      formData.append('dispatchSuffix', dispatchSuffix)
+      formData.append('invoiceNumber', invoiceNumber)
 
       const response = await fetch('/api/convert-invoice', {
         method: 'POST',
@@ -118,11 +127,39 @@ const LexingtonFileConvBooztInvoice = () => {
           )}
         </div>
 
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <label className="block text-[#03e9f4] text-sm">
+              Internt nummer för Dispatch Advice Number (hur många restorders...)
+            </label>
+            <input
+              type="number"
+              value={dispatchSuffix}
+              onChange={(e) => setDispatchSuffix(e.target.value)}
+              className="w-full px-3 py-2 bg-black border-2 border-white/40 rounded text-white focus:border-[#03e9f4] focus:outline-none transition-colors"
+              placeholder="Ange suffix nummer"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label className="block text-[#03e9f4] text-sm">
+              Fakturanummer
+            </label>
+            <input
+              type="text"
+              value={invoiceNumber}
+              onChange={(e) => setInvoiceNumber(e.target.value)}
+              className="w-full px-3 py-2 bg-black border-2 border-white/40 rounded text-white focus:border-[#03e9f4] focus:outline-none transition-colors"
+              placeholder="Ange fakturanummer"
+            />
+          </div>
+        </div>
+
         <button
           onClick={handleConversion}
-          disabled={!invoiceFile || isLoading}
+          disabled={!invoiceFile || !dispatchSuffix || !invoiceNumber || isLoading}
           className={`w-full font-bold py-2 px-4 rounded transition-all duration-300
-            ${(!invoiceFile || isLoading) 
+            ${(!invoiceFile || !dispatchSuffix || !invoiceNumber || isLoading) 
               ? 'bg-black text-white border-2 border-white/40 opacity-50 cursor-not-allowed' 
               : 'bg-[#03e9f4] text-[#050801] shadow-[0_0_5px_#03e9f4,0_0_25px_#03e9f4,0_0_50px_#03e9f4,0_0_200px_#03e9f4] hover:shadow-[0_0_5px_#03e9f4,0_0_25px_#03e9f4,0_0_100px_#03e9f4,0_0_300px_#03e9f4] hover:scale-[1.02]'}`}
         >

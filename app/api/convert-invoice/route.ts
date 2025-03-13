@@ -6,9 +6,11 @@ export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData()
     const invoiceFile = formData.get('invoiceFile') as File
+    const dispatchSuffix = formData.get('dispatchSuffix') as string
+    const invoiceNumber = formData.get('invoiceNumber') as string
     
-    if (!invoiceFile) {
-      return NextResponse.json({ error: 'Ingen fil hittades' }, { status: 400 })
+    if (!invoiceFile || !dispatchSuffix || !invoiceNumber) {
+      return NextResponse.json({ error: 'Alla fält krävs' }, { status: 400 })
     }
 
     // Läs input-filen
@@ -22,13 +24,16 @@ export async function POST(request: NextRequest) {
       header: ['A', 'B', 'C', 'D', 'E', 'F', 'G']  // Använd bokstäver som headers
     }) as any[]
 
+    // Hämta Boozt order number från E2 (index 1 eftersom vi börjar från 0)
+    const booztOrderNumber = jsonData[1]?.['E'] || ''
+
     // Ta bort header-raden och konvertera data till nytt format
     const data = jsonData.slice(1).map(row => ({
-      'Dispatch advice number': row['A'],          // Från A till A
-      'Supplier order number': row['A'],           // Från A till B
-      'Boozt order number': row['E'],             // Från E till C
-      'EAN code': row['B'],                       // Från B till D
-      'Quantity': row['C']                        // Från C till E
+      'Dispatch advice number': `${row['A']}-${dispatchSuffix}`,  // Lägg till suffix
+      'Supplier order number': row['A'],
+      'Boozt order number': row['E'],
+      'EAN code': row['B'],
+      'Quantity': row['C']
     }))
 
     // Skapa ny Excel-fil med ExcelJS
@@ -60,8 +65,8 @@ export async function POST(request: NextRequest) {
     // Generera Excel-filen
     const buffer = await newWorkbook.xlsx.writeBuffer()
 
-    // Använd dispatch advice number från första raden som filnamn
-    const fileName = data[0]?.['Dispatch advice number'] || 'converted-invoice'
+    // Använd det nya filnamnsformatet
+    const fileName = `${invoiceNumber}-${booztOrderNumber}`
 
     return new NextResponse(buffer, {
       headers: {
