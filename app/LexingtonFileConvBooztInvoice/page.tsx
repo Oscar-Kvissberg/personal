@@ -138,7 +138,7 @@ const LexingtonFileConvBooztInvoice = () => {
               value={dispatchSuffix}
               onChange={(e) => setDispatchSuffix(e.target.value)}
               className="w-full px-3 py-2 bg-black border-2 border-white/40 rounded text-white focus:border-[#03e9f4] focus:outline-none transition-colors"
-              placeholder="Ange suffix nummer"
+              placeholder="(Valfritt), 0 & tomt = initial faktura"
             />
           </div>
 
