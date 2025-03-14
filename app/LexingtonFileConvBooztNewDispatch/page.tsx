@@ -123,7 +123,7 @@ const LexingtonFileConverterBooztNewDispatch = () => {
             htmlFor="packing-file-upload"
             className="cursor-pointer text-[#03e9f4] transition-all duration-300 hover:scale-110 inline-block"
           >
-            Klicka för att välja Packing List fil (P)
+            Klicka för att välja Packing List fil
           </label>
           <p className="mt-2 text-sm text-gray-500">
             eller dra och släpp filen här
@@ -154,7 +154,7 @@ const LexingtonFileConverterBooztNewDispatch = () => {
             htmlFor="order-file-upload"
             className="cursor-pointer text-[#03e9f4] transition-all duration-300 hover:scale-110 inline-block"
           >
-            Klicka för att välja Order fil (F)
+            Klicka för att välja Delivery Note
           </label>
           <p className="mt-2 text-sm text-gray-500">
             eller dra och släpp filen här
