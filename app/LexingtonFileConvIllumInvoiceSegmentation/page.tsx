@@ -8,6 +8,7 @@ const IllumInvoiceSegmentation = () => {
   const [documentNo, setDocumentNo] = useState('')
   const [store, setStore] = useState('')
   const [isDragging, setIsDragging] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault()
@@ -40,31 +41,24 @@ const IllumInvoiceSegmentation = () => {
       return
     }
 
-    console.log('Starting conversion...') // Debug log
-
+    setIsLoading(true)
     const formData = new FormData()
     formData.append('file', file)
     formData.append('documentNo', documentNo)
     formData.append('store', store)
 
     try {
-      console.log('Sending request...') // Debug log
       const response = await fetch('/api/convertIllumInvoice', {
         method: 'POST',
         body: formData,
       })
 
-      console.log('Response received:', response.status) // Debug log
-
       if (!response.ok) {
         const errorText = await response.text()
-        console.error('Error response:', errorText) // Debug log
         throw new Error(`Conversion failed: ${errorText}`)
       }
 
       const blob = await response.blob()
-      console.log('Blob received:', blob.size) // Debug log
-      
       const url = window.URL.createObjectURL(blob)
       const a = document.createElement('a')
       a.href = url
@@ -74,55 +68,22 @@ const IllumInvoiceSegmentation = () => {
       
       window.URL.revokeObjectURL(url)
       document.body.removeChild(a)
-      
-      console.log('Download complete') // Debug log
     } catch (error) {
-      console.error('Detailed error:', error) // Mer detaljerad error logging
+      console.error('Detailed error:', error)
       alert('Failed to convert file: ' + (error as Error).message)
+    } finally {
+      setIsLoading(false)
     }
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 py-20 px-4">
-      <div className="max-w-2xl mx-auto">
-        <h1 className="text-3xl font-light text-white mb-8">Illum Invoice Segmentation</h1>
-        
-        {/* Input fields */}
-        <div className="space-y-4 mb-6">
-          <div>
-            <label htmlFor="documentNo" className="block text-sm font-medium text-gray-300 mb-1">
-              Document No.
-            </label>
-            <input
-              type="text"
-              id="documentNo"
-              value={documentNo}
-              onChange={(e) => setDocumentNo(e.target.value)}
-              className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-blue-500"
-              placeholder="Enter document number"
-            />
-          </div>
-          
-          <div>
-            <label htmlFor="store" className="block text-sm font-medium text-gray-300 mb-1">
-              Store
-            </label>
-            <input
-              type="text"
-              id="store"
-              value={store}
-              onChange={(e) => setStore(e.target.value)}
-              className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-blue-500"
-              placeholder="Enter store name"
-            />
-          </div>
-        </div>
-
-        {/* File upload area */}
-        <div
-          className={`border-2 border-dashed rounded-lg p-8 text-center ${
-            isDragging ? 'border-blue-500 bg-blue-500/10' : 'border-gray-700 hover:border-gray-600'
-          }`}
+    <div className="container mx-auto p-8 mt-20">
+      <h1 className="text-2xl font-bold mb-6">Konvertera Illum Invoice till NAV format</h1>
+      
+      <div className="space-y-4">
+        <div 
+          className={`border-2 border-dashed rounded-lg p-8 text-center
+            ${isDragging ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
@@ -134,30 +95,59 @@ const IllumInvoiceSegmentation = () => {
             className="hidden"
             id="fileInput"
           />
-          <label
+          <label 
             htmlFor="fileInput"
-            className="cursor-pointer flex flex-col items-center"
+            className="cursor-pointer text-[#03e9f4] transition-all duration-300 hover:scale-110 inline-block"
           >
-            <ArrowUpTrayIcon className="w-10 h-10 text-gray-400 mb-3" />
-            <span className="text-gray-300">
-              {file ? file.name : 'Drop your CSV file here or click to browse'}
-            </span>
+            Klicka för att välja CSV fil
           </label>
+          <p className="mt-2 text-sm text-gray-500">
+            eller dra och släpp filen här
+          </p>
+          {file && (
+            <p className="mt-2 text-gray-600">
+              Vald fil: {file.name}
+            </p>
+          )}
         </div>
 
-        {/* Convert button */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <label className="block text-[#03e9f4] text-sm">
+              Document No.
+            </label>
+            <input
+              type="text"
+              value={documentNo}
+              onChange={(e) => setDocumentNo(e.target.value)}
+              className="w-full px-3 py-2 bg-black border-2 border-white/40 rounded text-white focus:border-[#03e9f4] focus:outline-none transition-colors"
+              placeholder="Enter document number"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label className="block text-[#03e9f4] text-sm">
+              Store
+            </label>
+            <input
+              type="text"
+              value={store}
+              onChange={(e) => setStore(e.target.value)}
+              className="w-full px-3 py-2 bg-black border-2 border-white/40 rounded text-white focus:border-[#03e9f4] focus:outline-none transition-colors"
+              placeholder="Enter store name"
+            />
+          </div>
+        </div>
+
         <button
           onClick={handleSubmit}
-          disabled={!file || !documentNo || !store}
-          className={`mt-6 w-full py-2 px-4 rounded-lg font-medium
-            ${
-              file && documentNo && store
-                ? 'bg-blue-500 hover:bg-blue-600 text-white'
-                : 'bg-gray-700 text-gray-400 cursor-not-allowed'
-            }
-          `}
+          disabled={!file || !documentNo || !store || isLoading}
+          className={`w-full font-bold py-2 px-4 rounded transition-all duration-300
+            ${(!file || !documentNo || !store || isLoading) 
+              ? 'bg-black text-white border-2 border-white/40 opacity-50 cursor-not-allowed' 
+              : 'bg-[#03e9f4] text-[#050801] shadow-[0_0_5px_#03e9f4,0_0_25px_#03e9f4,0_0_50px_#03e9f4,0_0_200px_#03e9f4] hover:shadow-[0_0_5px_#03e9f4,0_0_25px_#03e9f4,0_0_100px_#03e9f4,0_0_300px_#03e9f4] hover:scale-[1.02]'}`}
         >
-          Convert to Excel
+          {isLoading ? 'Konverterar...' : 'Konvertera fil'}
         </button>
       </div>
     </div>
