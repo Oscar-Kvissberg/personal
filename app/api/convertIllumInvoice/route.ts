@@ -97,7 +97,7 @@ export async function POST(req: NextRequest) {
             // Beräkna Unit Price baserat på vendor number
             let unitPrice = 0
             if (quantity !== 0) {  // Behåll denna check för att undvika division med noll
-                const basePrice = netSales / Math.abs(quantity)  // Använd absolut värde av quantity
+                const basePrice = netSales / quantity  // Nu kan både netSales och quantity vara negativa
                 if (vendorItemNumber.startsWith('1')) {
                     unitPrice = basePrice / 2
                 } else if (vendorItemNumber.startsWith('2')) {
