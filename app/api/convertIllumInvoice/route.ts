@@ -30,19 +30,58 @@ export async function POST(req: NextRequest) {
             // Rensa och konvertera numeriska värden
             const cleanNumber = (value: string) => {
                 if (!value) return 0
-                // Konvertera först komma till punkt för decimaler
-                // Sen ta bort mellanslag och hantera punkt-tusentalsavgränsare
-                return parseFloat(
-                    value.replace(/\s/g, '')  // Ta bort mellanslag
-                         .replace(/\.(?=.*,)/, '')  // Ta bort punkter som kommer före komma (tusentalsavgränsare)
-                         .replace(',', '.')  // Konvertera komma till punkt för decimaler
-                ) || 0
+                
+                console.log('Raw value:', value)
+                
+                // Ta bort alla mellanslag först och normalisera minustecken
+                let cleanValue = value.replace(/\s/g, '')
+                                    .replace(/−/g, '-')  // Konvertera Unicode minus till standard minus
+                console.log('After removing spaces:', cleanValue)
+                
+                // Spara minustecknet om det finns och ta bort det tillfälligt
+                const isNegative = cleanValue.startsWith('-')
+                if (isNegative) {
+                    cleanValue = cleanValue.substring(1)
+                }
+                console.log('Is negative:', isNegative)
+                console.log('Value without minus:', cleanValue)
+                
+                let result = 0
+                // Om värdet innehåller både punkt och komma
+                // (t.ex. "1.900,455" -> 1900.455)
+                if (cleanValue.includes('.') && cleanValue.includes(',')) {
+                    result = parseFloat(
+                        cleanValue
+                            .replace(/\./g, '')     // Ta bort alla punkter (tusentalsavgränsare)
+                            .replace(',', '.')       // Byt komma mot punkt för decimaler
+                    ) || 0
+                }
+                // Om värdet bara innehåller punkt
+                // (t.ex. "1.900" -> 1900)
+                else if (cleanValue.includes('.') && !cleanValue.includes(',')) {
+                    result = parseFloat(cleanValue.replace(/\./g, '')) || 0
+                }
+                // Om värdet bara innehåller komma
+                // (t.ex. "1,455" -> 1.455)
+                else if (cleanValue.includes(',') && !cleanValue.includes('.')) {
+                    result = parseFloat(cleanValue.replace(',', '.')) || 0
+                }
+                // Om värdet är ett rent nummer
+                // (t.ex. "880" -> 880)
+                else {
+                    result = parseFloat(cleanValue) || 0
+                }
+                
+                // Lägg tillbaka minustecknet om det fanns
+                const finalResult = isNegative ? -result : result
+                console.log('Final result:', finalResult)
+                return finalResult
             }
 
             const quantity = cleanNumber(row[5])  // F kolumnen
             const netSales = cleanNumber(row[8])  // I kolumnen
             
-            console.log('Processing row:', {
+            console.log('Final values:', {
                 vendorItemNumber,
                 rawQuantity: row[5],
                 quantity,
@@ -57,8 +96,8 @@ export async function POST(req: NextRequest) {
 
             // Beräkna Unit Price baserat på vendor number
             let unitPrice = 0
-            if (quantity !== 0) {
-                const basePrice = netSales / quantity
+            if (quantity !== 0) {  // Behåll denna check för att undvika division med noll
+                const basePrice = netSales / Math.abs(quantity)  // Använd absolut värde av quantity
                 if (vendorItemNumber.startsWith('1')) {
                     unitPrice = basePrice / 2
                 } else if (vendorItemNumber.startsWith('2')) {
@@ -74,7 +113,7 @@ export async function POST(req: NextRequest) {
                 'No.': itemNo,
                 'Variant Code': variantCode,
                 'Location Code': store,
-                'Quantity': quantity,
+                'Quantity': quantity,  // Kan vara negativt för returer
                 'Unit Price': Number(unitPrice.toFixed(2)),
                 'Drop shipment': 'False'
             }
