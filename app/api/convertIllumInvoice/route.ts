@@ -30,9 +30,13 @@ export async function POST(req: NextRequest) {
             // Rensa och konvertera numeriska värden
             const cleanNumber = (value: string) => {
                 if (!value) return 0
-                // Ta bort mellanslag och konvertera punkt-tusentalsavgränsare
-                // '2.400' blir '2400'
-                return parseFloat(value.replace(/\s/g, '').replace('.', '')) || 0
+                // Konvertera först komma till punkt för decimaler
+                // Sen ta bort mellanslag och hantera punkt-tusentalsavgränsare
+                return parseFloat(
+                    value.replace(/\s/g, '')  // Ta bort mellanslag
+                         .replace(/\.(?=.*,)/, '')  // Ta bort punkter som kommer före komma (tusentalsavgränsare)
+                         .replace(',', '.')  // Konvertera komma till punkt för decimaler
+                ) || 0
             }
 
             const quantity = cleanNumber(row[5])  // F kolumnen
@@ -71,7 +75,7 @@ export async function POST(req: NextRequest) {
                 'Variant Code': variantCode,
                 'Location Code': store,
                 'Quantity': quantity,
-                'Unit Price': Math.round(unitPrice), // Avrundar till heltal
+                'Unit Price': Number(unitPrice.toFixed(2)),
                 'Drop shipment': 'False'
             }
         })
@@ -90,7 +94,11 @@ export async function POST(req: NextRequest) {
 
         // Lägg till data från rad 4
         transformedData.forEach((row, index) => {
-            worksheet.getRow(index + 4).values = Object.values(row)
+            const excelRow = worksheet.getRow(index + 4)
+            excelRow.values = Object.values(row)
+            
+            // Sätt nummerformat för Unit Price kolumnen (index 9 eftersom det är den 9:e kolumnen)
+            excelRow.getCell(9).numFmt = '#,##0.00'
         })
 
         // Generera buffer
