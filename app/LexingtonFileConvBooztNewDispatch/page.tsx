@@ -7,6 +7,7 @@ const LexingtonFileConverterBooztNewDispatch = () => {
   const [quantityFile, setQuantityFile] = useState<File | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [dragOver, setDragOver] = useState({ packing: false, order: false, quantity: false })
+  const [dispatchSuffix, setDispatchSuffix] = useState('')
 
   const handleDragOver = (e: DragEvent, type: 'packing' | 'order' | 'quantity') => {
     e.preventDefault()
@@ -65,6 +66,7 @@ const LexingtonFileConverterBooztNewDispatch = () => {
       formData.append('packingFile', packingFile)
       formData.append('orderFile', orderFile)
       formData.append('quantityFile', quantityFile)
+      formData.append('dispatchSuffix', dispatchSuffix)
 
       const response = await fetch('/api/convert-excel', {
         method: 'POST',
@@ -195,6 +197,21 @@ const LexingtonFileConverterBooztNewDispatch = () => {
               Kvantitetsfil: {quantityFile.name}
             </p>
           )}
+        </div>
+
+        {/* Dispatch Suffix Input */}
+        <div className="border-2 border-gray-300 rounded-lg p-4">
+          <label className="block text-sm font-medium text-gray-400 mb-2">
+            Antal restorders (valfritt, inget = initial faktura)
+          </label>
+          <input
+            type="number"
+            min="0"
+            value={dispatchSuffix}
+            onChange={(e) => setDispatchSuffix(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-black"
+            placeholder="T.ex. 1"
+          />
         </div>
 
         <button

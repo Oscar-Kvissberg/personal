@@ -29,6 +29,7 @@ export async function POST(request: NextRequest) {
     const packingFile = formData.get('packingFile') as File
     const orderFile = formData.get('orderFile') as File
     const quantityFile = formData.get('quantityFile') as File
+    const dispatchSuffix = formData.get('dispatchSuffix') as string
     
     if (!packingFile || !orderFile || !quantityFile) {
       return NextResponse.json({ error: 'Alla tre filer krävs' }, { status: 400 })
@@ -84,6 +85,11 @@ export async function POST(request: NextRequest) {
       row21: row21Data,
       row23: row23Data
     })
+
+    // Modifiera dispatchAdviceNumber om det finns ett suffix
+    if (dispatchSuffix && dispatchSuffix.trim() !== '') {
+      dispatchAdviceNumber = `${dispatchAdviceNumber}-${dispatchSuffix}`
+    }
 
     // Läs packinglist-filen
     const packingBytes = await packingFile.arrayBuffer()
@@ -202,7 +208,7 @@ export async function POST(request: NextRequest) {
           'Dispatch Advice form': dispatchAdviceNumber,
           'EAN Code': ean,
           'Quantity dispatched': quantity || '0',
-          'Purchase order number': dispatchAdviceNumber,
+          'Purchase order number': dispatchAdviceNumber.split('-')[0],
           'Boozt Purchase number': booztPurchaseNumber,
           'Dispatch Date': formatDate(today),
           'Scheduled Arrival Date': formatDate(nextWorkDay),
