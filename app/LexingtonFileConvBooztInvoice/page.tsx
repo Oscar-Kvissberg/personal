@@ -5,7 +5,6 @@ const LexingtonFileConvBooztInvoice = () => {
   const [invoiceFile, setInvoiceFile] = useState<File | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [dragOver, setDragOver] = useState(false)
-  const [dispatchSuffix, setDispatchSuffix] = useState('')
   const [invoiceNumber, setInvoiceNumber] = useState('')
 
   const handleDragOver = (e: DragEvent) => {
@@ -56,7 +55,6 @@ const LexingtonFileConvBooztInvoice = () => {
     try {
       const formData = new FormData()
       formData.append('invoiceFile', invoiceFile)
-      formData.append('dispatchSuffix', dispatchSuffix)
       formData.append('invoiceNumber', invoiceNumber)
 
       const response = await fetch('/api/convert-invoice', {
@@ -127,21 +125,7 @@ const LexingtonFileConvBooztInvoice = () => {
           )}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <label className="block text-[#03e9f4] text-sm">
-              Internt nummer för Dispatch Advice Number (Hur många restorders?...)
-            </label>
-            <input
-              type="number"
-              min="0"
-              value={dispatchSuffix}
-              onChange={(e) => setDispatchSuffix(e.target.value)}
-              className="w-full px-3 py-2 bg-black border-2 border-white/40 rounded text-white focus:border-[#03e9f4] focus:outline-none transition-colors"
-              placeholder="(Valfritt), 0 & tomt = initial faktura"
-            />
-          </div>
-
+        <div className="grid grid-cols-1 gap-4">
           <div className="space-y-2">
             <label className="block text-[#03e9f4] text-sm">
               Fakturanummer
