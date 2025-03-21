@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
     })
 
     // Modifiera dispatchAdviceNumber om det finns ett suffix
-    if (dispatchSuffix && dispatchSuffix.trim() !== '') {
+    if (dispatchSuffix && dispatchSuffix.trim() !== '' && dispatchSuffix !== '0') {
       dispatchAdviceNumber = `${dispatchAdviceNumber}-${dispatchSuffix}`
     }
 

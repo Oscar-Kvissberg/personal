@@ -208,7 +208,13 @@ const LexingtonFileConverterBooztNewDispatch = () => {
             type="number"
             min="0"
             value={dispatchSuffix}
-            onChange={(e) => setDispatchSuffix(e.target.value)}
+            onChange={(e) => {
+              if (e.target.value === '0') {
+                setDispatchSuffix('')
+              } else {
+                setDispatchSuffix(e.target.value)
+              }
+            }}
             className="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-black"
             placeholder="T.ex. 1"
           />
