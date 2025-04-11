@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useRef, DragEvent } from 'react'
+import React, { useState, DragEvent } from 'react'
 
 const LexingtonFileConverterBooztNewDispatch = () => {
   const [packingFile, setPackingFile] = useState<File | null>(null)
@@ -232,7 +232,7 @@ const LexingtonFileConverterBooztNewDispatch = () => {
         </button>
 
         <h2>
-          Obs. Glöm inte att gå in på SESO'n i NAV- klicka post and print invoice.
+          Obs. Glöm inte att gå in på SESO&apos;n i NAV- klicka post and print invoice.
           Sen gå till Posted Documents och printa fakturan som excel fil. 
           (Denna fukturan ska sedan in här för att få ut dispatchen.)
         </h2>

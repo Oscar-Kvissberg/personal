@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { ArrowUpTrayIcon } from '@heroicons/react/24/outline'
+
 
 const IllumInvoiceSegmentation = () => {
   const [file, setFile] = useState<File | null>(null)
