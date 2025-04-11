@@ -232,8 +232,9 @@ const LexingtonFileConverterBooztNewDispatch = () => {
         </button>
 
         <h2>
-          Obs. Glöm inte att gå in på SESO i NAV- klicka post and print invoice.
-          Sen gå till Posted Documents och printa fakturan som excel fil. (Denna fukturan ska sedan in här för att få ut dispatchen.)
+          Obs. Glöm inte att gå in på SESO'n i NAV- klicka post and print invoice.
+          Sen gå till Posted Documents och printa fakturan som excel fil. 
+          (Denna fukturan ska sedan in här för att få ut dispatchen.)
         </h2>
       </div>
     </div>
