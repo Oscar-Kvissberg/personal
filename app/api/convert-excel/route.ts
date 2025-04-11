@@ -209,7 +209,7 @@ export async function POST(request: NextRequest) {
           'EAN Code': ean,
           'Quantity dispatched': quantity || '0',
           'Purchase order number': dispatchAdviceNumber.split('-')[0],
-          'Boozt Purchase number': booztPurchaseNumber,
+          'Boozt Order No.': booztPurchaseNumber,
           'Dispatch Date': formatDate(today),
           'Scheduled Arrival Date': formatDate(nextWorkDay),
           'Box No.': boxNo || ''
@@ -228,7 +228,7 @@ export async function POST(request: NextRequest) {
       'EAN Code',
       'Quantity dispatched',
       'Purchase order number',
-      'Boozt Purchase number',
+      'Boozt Order No.',
       'Dispatch Date',
       'Scheduled Arrival Date',
       'Box No.'  // Flyttad till slutet
@@ -261,7 +261,7 @@ export async function POST(request: NextRequest) {
         'EAN Code': row['EAN Code'],
         'Quantity dispatched': row['Quantity dispatched'],
         'Purchase order number': row['Purchase order number'],
-        'Boozt Purchase number': row['Boozt Purchase number'],
+        'Boozt Order No.': row['Boozt Order No.'],
         'Dispatch Date': row['Dispatch Date'],
         'Scheduled Arrival Date': row['Scheduled Arrival Date'],
         'Box No.': row['Box No.']  // Flyttad till slutet
