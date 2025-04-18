@@ -7,8 +7,9 @@
             "startDate": "Jan 2025",
             "endDate": "Present",
             "description": [
-                "Developing a deeper understanding of Supply Chain processes by analyzing and mapping flows, identifying areas for improvement, and creating and refining forecasting models to optimize production and inventory management",
-                "Developed a forecasting tool using Python with machine learning libraries (Gradient Boosting/XgBoost)- to improve forecasting accuracy and optimize the supply planning process"
+                "Developing a deeper understanding of Supply Chain processes by learning internal flows, identifying areas for improvement, and creating small applicaitons for process improvements",
+                "Developed a forecasting tool using Python with machine learning libraries (Gradient Boosting)- to improve forecasting accuracy and optimize the supply planning process",
+                "Developed several file/invoice converters using Next.js"
             ],
             "tags": [
                 "Supply Chain",
@@ -16,6 +17,21 @@
                 "Process Optimization"
             ],
             "logo": "/images/lexington-logo.png"
+        },
+        {
+            "title": "Master Thesis Student",
+            "company": "Ovako",
+            "location": "Linköping, Sweden",
+            "startDate": "Jan 2025",
+            "endDate": "Present",
+            "description": [
+                "Thesis about the implmentation of Statistical Process Control (SPC) in the steel manufacturing industry"
+            ],
+            "tags": [
+                "Implmentation and change management"
+                
+            ],
+            "logo": "/images/ovako logo.png"
         },
         {
             "title": "Co-founder and CEO",
@@ -26,7 +42,8 @@
             "description": [
                 "Developed an Excel VBA calculation template for automatically calculating depreciation and charges related to apartment inspections",
                 "Developed a web application for AI generation of policies for sports clubs in Sweden",
-                "Built features including account management, email reminders, and digital signatures"
+                "Built features including account management, email reminders, and digital signatures",
+                "Built a RAG application using Next.js, Langchain, and Supabase"
             ],
             "tags": [
                 "Next.js",
