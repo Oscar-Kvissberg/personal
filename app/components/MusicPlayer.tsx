@@ -51,15 +51,19 @@ const MusicPlayer = () => {
                     loop: 1,
                     playlist: currentSong.id,
                     playsinline: 1,
-                    controls: 0
+                    controls: 0,
+                    mute: 1
                 },
                 events: {
                     onReady: (event: any) => {
                         console.log('Player ready')
                         setIsPlayerReady(true)
+                        event.target.unMute()
+                        event.target.setVolume(100)
                     },
                     onStateChange: (event: any) => {
                         if (event.data === window.YT.PlayerState.PLAYING) {
+                            event.target.unMute()
                             setIsPlaying(true)
                         } else if (event.data === window.YT.PlayerState.PAUSED || 
                                  event.data === window.YT.PlayerState.ENDED) {
@@ -106,6 +110,8 @@ const MusicPlayer = () => {
                         })
                         setCurrentSong(selectedSong)
                     }
+                    await playerRef.current.unMute()
+                    await playerRef.current.setVolume(100)
                     await playerRef.current.playVideo()
                 }
             } catch (error) {
@@ -124,6 +130,8 @@ const MusicPlayer = () => {
                     videoId: song.id,
                     startSeconds: song.startTime || 0
                 })
+                await playerRef.current.unMute()
+                await playerRef.current.setVolume(100)
                 setCurrentSong(song)
                 setIsPlaying(false)
             } catch (error) {
