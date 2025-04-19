@@ -31,6 +31,7 @@ const MusicPlayer = () => {
     const [currentSong, setCurrentSong] = useState(songs[0])
     const [selectedSong, setSelectedSong] = useState(songs[0])
     const playerRef = useRef<any>(null)
+    const menuRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         const tag = document.createElement('script')
@@ -63,6 +64,22 @@ const MusicPlayer = () => {
             }
         }
     }, [])
+
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+                setIsDropdownOpen(false)
+            }
+        }
+
+        if (isDropdownOpen) {
+            document.addEventListener('mousedown', handleClickOutside)
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [isDropdownOpen])
 
     const togglePlay = () => {
         if (playerRef.current) {
@@ -99,7 +116,7 @@ const MusicPlayer = () => {
 
     return (
         <div className="fixed top-0 right-4 flex items-center gap-2 z-[51]">
-            <div className="relative">
+            <div className="relative" ref={menuRef}>
                 <button
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                     className="h-10 flex items-center px-3 hover:bg-gray-800/50 rounded-lg transition-colors text-gray-200 hover:text-white gap-2"
@@ -108,7 +125,6 @@ const MusicPlayer = () => {
                     <ChevronDownIcon className="w-4 h-4" />
                 </button>
 
-                {/* Dropdown menu */}
                 {isDropdownOpen && (
                     <div className="absolute right-0 top-12 bg-gray-900/90 backdrop-blur-md rounded-lg border border-gray-200/20 py-1 min-w-[200px]">
                         {songs.map((song) => (
