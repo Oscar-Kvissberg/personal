@@ -30,6 +30,7 @@ const MusicPlayer = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     const [currentSong, setCurrentSong] = useState(songs[0])
     const [selectedSong, setSelectedSong] = useState(songs[0])
+    const [isPlayerReady, setIsPlayerReady] = useState(false)
     const playerRef = useRef<any>(null)
     const menuRef = useRef<HTMLDivElement>(null)
 
@@ -48,11 +49,22 @@ const MusicPlayer = () => {
                     autoplay: 0,
                     start: currentSong.startTime || 0,
                     loop: 1,
-                    playlist: currentSong.id
+                    playlist: currentSong.id,
+                    playsinline: 1,
+                    controls: 0
                 },
                 events: {
                     onReady: (event: any) => {
                         console.log('Player ready')
+                        setIsPlayerReady(true)
+                    },
+                    onStateChange: (event: any) => {
+                        if (event.data === window.YT.PlayerState.PLAYING) {
+                            setIsPlaying(true)
+                        } else if (event.data === window.YT.PlayerState.PAUSED || 
+                                 event.data === window.YT.PlayerState.ENDED) {
+                            setIsPlaying(false)
+                        }
                     }
                 }
             })
@@ -81,36 +93,42 @@ const MusicPlayer = () => {
         }
     }, [isDropdownOpen])
 
-    const togglePlay = () => {
-        if (playerRef.current) {
-            if (isPlaying) {
-                playerRef.current.pauseVideo()
-            } else {
-                if (selectedSong.id !== currentSong.id) {
-                    playerRef.current.loadVideoById({
-                        videoId: selectedSong.id,
-                        startSeconds: selectedSong.startTime || 0
-                    })
-                    setCurrentSong(selectedSong)
+    const togglePlay = async () => {
+        if (playerRef.current && isPlayerReady) {
+            try {
+                if (isPlaying) {
+                    await playerRef.current.pauseVideo()
                 } else {
-                    playerRef.current.playVideo()
+                    if (selectedSong.id !== currentSong.id) {
+                        await playerRef.current.loadVideoById({
+                            videoId: selectedSong.id,
+                            startSeconds: selectedSong.startTime || 0
+                        })
+                        setCurrentSong(selectedSong)
+                    }
+                    await playerRef.current.playVideo()
                 }
+            } catch (error) {
+                console.error('Error toggling play state:', error)
             }
-            setIsPlaying(!isPlaying)
         }
     }
 
-    const changeSong = (song: Song) => {
+    const changeSong = async (song: Song) => {
         setSelectedSong(song)
         setIsDropdownOpen(false)
         
-        if (playerRef.current) {
-            playerRef.current.cueVideoById({
-                videoId: song.id,
-                startSeconds: song.startTime || 0
-            })
-            setCurrentSong(song)
-            setIsPlaying(false)
+        if (playerRef.current && isPlayerReady) {
+            try {
+                await playerRef.current.cueVideoById({
+                    videoId: song.id,
+                    startSeconds: song.startTime || 0
+                })
+                setCurrentSong(song)
+                setIsPlaying(false)
+            } catch (error) {
+                console.error('Error changing song:', error)
+            }
         }
     }
 
