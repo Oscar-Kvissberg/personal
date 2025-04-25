@@ -20,6 +20,7 @@ const songs: Song[] = [
     { id: 'JaSewH9ikyI', title: 'Inferno T-Spawn Music', startTime: 1 },
     { id: 'sIWnz0x_pSQ', title: 'Black Ops 2 Lobby Music', startTime: 1 },
     { id: '2dPaeQTdhJM', title: 'Black Ops 1 Lobby Music', startTime: 5 },
+    { id: 'Rvi6c8toWJM', title: 'Original Counter Strike Lobby Music', startTime: 32 },
     // Lägg till fler låtar här, exempel:
     // { id: 'annatYouTubeId', title: 'Mirage A-Site', startTime: 0 },
     // { id: 'tredjeLåtId', title: 'Dust2 Long', startTime: 150 },
