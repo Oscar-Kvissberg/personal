@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { useState } from 'react'
 import Image from 'next/image'
-import { UserCircleIcon, RocketLaunchIcon, CakeIcon, CreditCardIcon, RectangleGroupIcon, MusicalNoteIcon, SpeakerXMarkIcon, PlayIcon, PauseIcon } from '@heroicons/react/24/outline'
+import { UserCircleIcon, RocketLaunchIcon, CakeIcon, CreditCardIcon, RectangleGroupIcon, MusicalNoteIcon, SpeakerXMarkIcon, PlayIcon, PauseIcon, DocumentTextIcon } from '@heroicons/react/24/outline'
 import MusicPlayer from './MusicPlayer'
 
 declare global {
@@ -127,11 +127,11 @@ const Navbar = () => {
                             Lexington Illum Inv. Seg.
                         </Link>
                         <Link
-                            href="/pdf-converter"
+                            href="/LexingtonFileConvCarvalho"
                             onClick={() => setIsOpen(false)}
                             className="text-gray-200 hover:text-white transition-colors flex items-center gap-3"
                         >
-                            <RectangleGroupIcon className="w-5 h-5" />
+                            <DocumentTextIcon className="w-5 h-5" />
                             Lexington Carvalho Invoice
                         </Link>
 

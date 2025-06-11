@@ -88,7 +88,7 @@ export default function PDFConverter() {
 
   return (
     <div className="container mx-auto p-8 mt-20">
-      <h1 className="text-2xl font-bold mb-6">PDF till Excel Konverterare</h1>
+      <h1 className="text-2xl font-bold mb-6">Lexington Carvalho Invoice Converter, PDF to Excel</h1>
       
       <div className="space-y-4">
         <div 
