@@ -84,12 +84,19 @@ export async function POST(request: NextRequest) {
           unitPrice = priceMatch[1];
           rest = rest.slice(priceMatch[1].length);
         }
-        // After extracting unit price, find the size at the end (format: XXxXX, first number starts with non-zero)
+        // After extracting unit price, find the size
+        // First try to find size pattern (e.g. 30x50)
         const sizeMatch = rest.match(/([1-9]\d{1,2}x\d{2,3})$/);
         if (sizeMatch) {
           size = sizeMatch[1];
           // Remove the size from the end of the string
           rest = rest.slice(0, rest.length - size.length).trim();
+        } else if (itemCode) {
+          // If no size pattern found, try to extract size from item code
+          const sizeFromCode = itemCode.match(/-([A-Z]+)$/);
+          if (sizeFromCode) {
+            size = sizeFromCode[1];
+          }
         }
 
         // Now try different splits of the remaining string to find where amount/quantity = unitPrice
