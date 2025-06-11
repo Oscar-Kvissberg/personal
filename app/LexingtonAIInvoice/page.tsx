@@ -90,8 +90,20 @@ export default function LexingtonAIInvoice() {
   };
 
   return (
+    <>
+    {/* Bakgrundsskuggor */}
+    <div className="fixed inset-0 z-[-2] overflow-hidden">
+      <div className="absolute top-[2%] left-[10%] w-[500px] h-[500px] bg-purple-500/60 rounded-full blur-[128px]" />
+      <div className="absolute bottom-[20%] right-[10%] w-[600px] h-[800px] bg-purple-500/30 rounded-full blur-[128px]" />
+      <div className="absolute top-[40%] right-[25%] w-[400px] h-[400px] bg-purple-500/30 rounded-full blur-[128px]" />
+    </div>
+
+
     <div className="container mx-auto p-8 mt-20">
       <h1 className="text-2xl font-bold mb-6">Lexington AI Invoice Converter</h1>
+      <h2 className="text-lg font-bold mb-6">
+        Extrahera samtliga rader och tabeller från en PDF-fil.
+      </h2>
       
       <div className="space-y-4">
         <div 
@@ -140,5 +152,6 @@ export default function LexingtonAIInvoice() {
         </button>
       </div>
     </div>
+    </>
   );
 }

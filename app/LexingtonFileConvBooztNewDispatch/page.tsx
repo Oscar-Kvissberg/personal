@@ -102,6 +102,15 @@ const LexingtonFileConverterBooztNewDispatch = () => {
   }
 
   return (
+
+    <>
+    {/* Bakgrundsskuggor */}
+    <div className="fixed inset-0 z-[-2] overflow-hidden">
+      <div className="absolute top-[2%] left-[10%] w-[500px] h-[500px] bg-purple-500/60 rounded-full blur-[128px]" />
+      <div className="absolute bottom-[20%] right-[10%] w-[600px] h-[800px] bg-purple-500/30 rounded-full blur-[128px]" />
+      <div className="absolute top-[40%] right-[25%] w-[400px] h-[400px] bg-purple-500/30 rounded-full blur-[128px]" />
+    </div>
+
     <div className="container mx-auto p-8 mt-20">
       <h1 className="text-2xl font-bold mb-6">Skapa Batch för att ladda upp till Boozt</h1>
       
@@ -238,6 +247,7 @@ const LexingtonFileConverterBooztNewDispatch = () => {
         </h2>
       </div>
     </div>
+    </>
   )
 }
 

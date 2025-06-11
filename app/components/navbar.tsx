@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { useState } from 'react'
 import Image from 'next/image'
-import { UserCircleIcon, RocketLaunchIcon, CakeIcon, CreditCardIcon, RectangleGroupIcon, MusicalNoteIcon, SpeakerXMarkIcon, PlayIcon, PauseIcon, DocumentTextIcon, SparklesIcon } from '@heroicons/react/24/outline'
+import { UserCircleIcon, RocketLaunchIcon, CakeIcon, CreditCardIcon, RectangleGroupIcon, DocumentTextIcon, SparklesIcon } from '@heroicons/react/24/outline'
 import MusicPlayer from './MusicPlayer'
 
 declare global {

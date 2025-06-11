@@ -26,9 +26,9 @@ export default function Home() {
     <>
       {/* Bakgrundsskuggor */}
       <div className="fixed inset-0 z-[-2] overflow-hidden">
-        <div className="absolute top-[2%] left-[10%] w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[128px]" />
-        <div className="absolute bottom-[20%] right-[10%] w-[600px] h-[800px] bg-purple-500/20 rounded-full blur-[128px]" />
-        <div className="absolute top-[40%] right-[25%] w-[400px] h-[400px] bg-cyan-500/20 rounded-full blur-[128px]" />
+        <div className="absolute top-[2%] left-[10%] w-[500px] h-[500px] bg-purple-500/60 rounded-full blur-[128px]" />
+        <div className="absolute bottom-[20%] right-[10%] w-[600px] h-[800px] bg-purple-500/30 rounded-full blur-[128px]" />
+        <div className="absolute top-[40%] right-[25%] w-[400px] h-[400px] bg-purple-500/30 rounded-full blur-[128px]" />
       </div>
 
       {/* Stjärnor */}
@@ -93,9 +93,11 @@ export default function Home() {
 
                 <div className="flex flex-col gap-6 min-w-0">
                   <div className="space-y-2">
-                    <h1 className="text-2xl sm:text-4xl font-bold text-white truncate">
+
+                    <h1 className="text-xl sm:text-lg md:text-2xl lg:text-3xl font-bold text-white truncate">
                       Tjena, <span className="text-white">Oscar</span> here <span className="hover:wave-animation inline-block cursor-pointer">👋</span>
                     </h1>
+                    
                     <p className="text-sm sm:text-base text-white/80">
                       Industrial Engineering student from Sweden, Stockholm.
                     </p>

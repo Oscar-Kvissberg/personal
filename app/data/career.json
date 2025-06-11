@@ -5,11 +5,11 @@
             "company": "Lexington Company AB",
             "location": "Stockholm, Sweden",
             "startDate": "Jan 2025",
-            "endDate": "Present",
+            "endDate": "Jun 2025",
             "description": [
-                "Developing a deeper understanding of Supply Chain processes by learning internal flows, identifying areas for improvement, and creating small applicaitons for process improvements",
+                "Developed a deeper understanding of Supply Chain processes by learning internal flows, identifying areas for improvement, and creating small applicaitons for process improvements",
                 "Developed a forecasting tool using Python with machine learning libraries (Gradient Boosting)- to improve forecasting accuracy and optimize the supply planning process",
-                "Developed several file/invoice converters using Next.js"
+                "Developed several file/invoice converters with Next.js (and Azure Form Recognizer/Document Intellegence ;) )"
             ],
             "tags": [
                 "Supply Chain",
@@ -23,7 +23,7 @@
             "company": "Ovako",
             "location": "Linköping, Sweden",
             "startDate": "Jan 2025",
-            "endDate": "Present",
+            "endDate": "Jun 2025",
             "description": [
                 "Thesis about the implmentation of Statistical Process Control (SPC) in the steel manufacturing industry"
             ],
@@ -59,7 +59,7 @@
             "company": "LIU Formula Student",
             "location": "Linköping",
             "startDate": "Jan 2024",
-            "endDate": "Present",
+            "endDate": "Jun 2025",
             "description": [
                 "Developed a Next.js/Python system for managing the Bill of Materials (BOM) for formula car components",
                 "Created business strategy as part of the cost and business team",
@@ -79,7 +79,7 @@
             "company": "Stångåstaden AB",
             "location": "Linköping",
             "startDate": "Jun 2023",
-            "endDate": "Present",
+            "endDate": "Sep 2024",
             "description": [
                 "Handled administration and planning of property management to ensure customer orders and needs in home maintenance and repairs were met",
                 "Worked closely with customers to fulfill their needs and maintain good relationships",
