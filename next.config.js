@@ -8,6 +8,10 @@ const nextConfig = {
             },
         ],
     },
+    experimental: {
+        appDir: true,
+        serverComponentsExternalPackages: ['pdf-parse', 'xlsx']
+    }
 }
 
 module.exports = nextConfig 

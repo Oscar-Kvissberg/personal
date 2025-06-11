@@ -126,6 +126,15 @@ const Navbar = () => {
                             <RectangleGroupIcon className="w-5 h-5" />
                             Lexington Illum Inv. Seg.
                         </Link>
+                        <Link
+                            href="/pdf-converter"
+                            onClick={() => setIsOpen(false)}
+                            className="text-gray-200 hover:text-white transition-colors flex items-center gap-3"
+                        >
+                            <RectangleGroupIcon className="w-5 h-5" />
+                            Lexington Carvalho Invoice
+                        </Link>
+
                     </div>
                 </div>
             </nav>
