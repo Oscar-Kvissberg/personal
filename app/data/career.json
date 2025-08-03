@@ -1,22 +1,27 @@
 {
     "career": [
+        
         {
-            "title": "Supply Chain Intern",
-            "company": "Lexington Company AB",
-            "location": "Stockholm, Sweden",
-            "startDate": "Jan 2025",
-            "endDate": "Jun 2025",
+            "title": "Co-founder and CEO",
+            "company": "Catalina Software Solutions AB",
+            "location": "Linköping",
+            "startDate": "Jun 2024",
+            "endDate": "Present",
             "description": [
-                "Developed a deeper understanding of Supply Chain processes by learning internal flows, identifying areas for improvement, and creating small applicaitons for process improvements",
-                "Developed a forecasting tool using Python with machine learning libraries (Gradient Boosting)- to improve forecasting accuracy and optimize the supply planning process",
-                "Developed several file/invoice converters with Next.js (and Azure Form Recognizer/Document Intellegence ;) )"
+                "Developed a web applicaiton for business case interviews by using generative ai to guide the user through the interview. https://aicaseprep.vercel.app/dash",
+                "Developed an Excel VBA calculation template for automatically calculating depreciation and charges related to apartment inspections",
+                "Developed a web application for AI generation of policies for sports clubs in Sweden",
+                "Built features including account management, email reminders, and digital signatures",
+                "Built a RAG application using Next.js, Supabase, and OpenAI to generate email responses to customers at a golf club"
             ],
             "tags": [
-                "Supply Chain",
-                "Machine Learning",
-                "Process Optimization"
+                "Next.js",
+                "Python",
+                "Tailwind CSS",
+                "PostgreSQL",
+                "VBA"
             ],
-            "logo": "/images/lexington-logo.png"
+            "logo": "/images/catalina logga.png"
         },
         {
             "title": "Master Thesis Student",
@@ -34,25 +39,22 @@
             "logo": "/images/ovako-logo.png"
         },
         {
-            "title": "Co-founder and CEO",
-            "company": "Catalina Software Solutions AB",
-            "location": "Linköping",
-            "startDate": "Jun 2024",
-            "endDate": "Present",
+            "title": "Supply Chain Intern",
+            "company": "Lexington Company AB",
+            "location": "Stockholm, Sweden",
+            "startDate": "Jan 2025",
+            "endDate": "Jun 2025",
             "description": [
-                "Developed an Excel VBA calculation template for automatically calculating depreciation and charges related to apartment inspections",
-                "Developed a web application for AI generation of policies for sports clubs in Sweden",
-                "Built features including account management, email reminders, and digital signatures",
-                "Built a RAG application using Next.js, Langchain, and Supabase"
+                "Developed a deeper understanding of Supply Chain processes by learning internal flows, identifying areas for improvement, and creating small applicaitons for process improvements",
+                "Developed a forecasting tool using Python with machine learning libraries (Gradient Boosting)- to improve forecasting accuracy and optimize the supply planning process",
+                "Developed several file/invoice converters with Next.js (and Azure Form Recognizer/Document Intellegence ;) )"
             ],
             "tags": [
-                "Next.js",
-                "Python",
-                "Tailwind CSS",
-                "PostgreSQL",
-                "VBA"
+                "Supply Chain",
+                "Machine Learning",
+                "Process Optimization"
             ],
-            "logo": "/images/catalina logga.png"
+            "logo": "/images/lexington-logo.png"
         },
         {
             "title": "Business Development and Sponsorship Contact",

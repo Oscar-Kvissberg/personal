@@ -45,7 +45,29 @@ export default function Timeline({ experience }: TimelineProps) {
                                 {item.description.map((desc, i) => (
                                     <li key={i} className="flex items-start gap-2">
                                         <span className="text-white/40 mt-1">•</span>
-                                        <span>{desc}</span>
+                                        <span>
+                                            {desc.split(' ').map((word, wordIndex) => {
+                                                // Check if the word is a URL
+                                                const urlRegex = /^(https?:\/\/[^\s]+)/;
+                                                const match = word.match(urlRegex);
+                                                
+                                                if (match) {
+                                                    return (
+                                                        <a
+                                                            key={wordIndex}
+                                                            href={match[1]}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="text-blue-400 hover:text-blue-300 underline"
+                                                        >
+                                                            {word}
+                                                        </a>
+                                                    );
+                                                }
+                                                
+                                                return word + (wordIndex < desc.split(' ').length - 1 ? ' ' : '');
+                                            })}
+                                        </span>
                                     </li>
                                 ))}
                             </ul>

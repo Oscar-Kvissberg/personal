@@ -35,7 +35,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Python
+# Python (nu i separat repo)
 __pycache__/
 *.py[cod]
 *$py.class
@@ -67,6 +67,10 @@ ENV/
 env.bak/
 venv.bak/
 
-# Python scripts
-python-scripts/__pycache__/
-python-scripts/.env
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
