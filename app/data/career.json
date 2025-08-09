@@ -12,7 +12,8 @@
                 "Developed an Excel VBA calculation template for automatically calculating depreciation and charges related to apartment inspections",
                 "Developed a web application for AI generation of policies for sports clubs in Sweden",
                 "Built features including account management, email reminders, and digital signatures",
-                "Built a RAG application using Next.js, Supabase, and OpenAI to generate email responses to customers at a golf club"
+                "Built a RAG application using Next.js, Supabase, and OpenAI to generate email responses to customers at a golf club",
+                "Read more about Catalina here: https://www.catalinasoftwaresolutions.se "
             ],
             "tags": [
                 "Next.js",
