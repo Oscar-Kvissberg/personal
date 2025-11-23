@@ -80,14 +80,14 @@ export default function Home() {
           {/* Vänster kolumn */}
           <div className="lg:fixed lg:w-[50%] min-h-fit lg:h-screen p-4 sm:p-8 lg:pt-0 relative z-[1]">
             <div className="max-w-xl mx-auto">
-              <div className="grid grid-cols-[140px,minmax(0,1fr)] gap-4 sm:gap-8">
-                <div className="w-[120px] sm:w-[140px] flex-shrink-0">
+              <div className="grid grid-cols-[180px,minmax(0,1fr)] gap-4 sm:gap-8">
+                <div className="w-[160px] sm:w-[180px] flex-shrink-0">
                   <Image
-                    src="/pp.jpg"
+                    src="/ogges.png"
                     alt="Profile picture"
-                    width={140}
-                    height={140}
-                    className="w-full h-auto rounded-lg object-cover border border-white/20"
+                    width={200}
+                    height={200}
+                    className="w-full h-auto rounded-lg object-cover"
                   />
                 </div>
 
@@ -95,11 +95,14 @@ export default function Home() {
                   <div className="space-y-2">
 
                     <h1 className="text-lg sm:text-lg md:text-2xl lg:text-3xl font-bold text-white truncate">
-                      Tjena, <span className="text-white">Oscar</span> here <span className="hover:wave-animation inline-block cursor-pointer">👋</span>
+                      Hello, <span className="text-white">Oscar</span> here <span className="hover:wave-animation inline-block cursor-pointer">👋</span>
                     </h1>
 
                     <p className="text-sm sm:text-base text-white/80">
-                      Industrial Engineering student from Sweden, Stockholm.
+                      Business consultant 
+                                    <br />
+
+                      📍Sweden, Stockholm
                     </p>
                     <p className="text-sm sm:text-base text-white/80">
                       I enjoy solving problems, playing Counter Strike 2, and downing instant coffee like it&apos;s liquid gold.
