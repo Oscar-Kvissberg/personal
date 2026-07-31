@@ -14,6 +14,7 @@ export default function ChatBot({ onOpenChat }: ChatBotProps) {
     const [input, setInput] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
+    const [conversationId, setConversationId] = useState<string | null>(null)
 
     useEffect(() => {
         onOpenChat(() => {
@@ -36,6 +37,7 @@ export default function ChatBot({ onOpenChat }: ChatBotProps) {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     message: input,
+                    conversationId,
                 }),
             })
 
@@ -43,6 +45,10 @@ export default function ChatBot({ onOpenChat }: ChatBotProps) {
 
             const data = await response.json()
             if (data.error) throw new Error(data.error)
+
+            if (data.conversationId) {
+                setConversationId(data.conversationId)
+            }
 
             setMessages(prev => [...prev, {
                 role: 'assistant',
