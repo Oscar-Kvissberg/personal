@@ -41,10 +41,10 @@ export default function ChatBot({ onOpenChat }: ChatBotProps) {
                 }),
             })
 
-            if (!response.ok) throw new Error('API request failed')
-
             const data = await response.json()
-            if (data.error) throw new Error(data.error)
+            if (!response.ok || data.error) {
+                throw new Error(data.error || 'API request failed')
+            }
 
             if (data.conversationId) {
                 setConversationId(data.conversationId)
@@ -56,9 +56,13 @@ export default function ChatBot({ onOpenChat }: ChatBotProps) {
             }])
         } catch (error) {
             console.error('Error:', error)
+            const message =
+                error instanceof Error
+                    ? error.message
+                    : 'Ursäkta, något gick fel. Försök igen senare.'
             setMessages(prev => [...prev, {
                 role: 'assistant',
-                content: 'Ursäkta, något gick fel. Försök igen senare.'
+                content: `Fel: ${message}`
             }])
         } finally {
             setIsLoading(false)

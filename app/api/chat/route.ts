@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { DefaultAzureCredential } from '@azure/identity'
+import { ClientSecretCredential, DefaultAzureCredential } from '@azure/identity'
 import { AIProjectClient } from '@azure/ai-projects'
 
 const endpoint =
@@ -9,7 +9,19 @@ const endpoint =
 const agentName = process.env.AZURE_AI_AGENT_NAME ?? 'Personalegent-new'
 const agentVersion = process.env.AZURE_AI_AGENT_VERSION ?? '4'
 
-const projectClient = new AIProjectClient(endpoint, new DefaultAzureCredential())
+function getCredential() {
+    const tenantId = process.env.AZURE_TENANT_ID
+    const clientId = process.env.AZURE_CLIENT_ID
+    const clientSecret = process.env.AZURE_CLIENT_SECRET
+
+    if (tenantId && clientId && clientSecret) {
+        return new ClientSecretCredential(tenantId, clientId, clientSecret)
+    }
+
+    return new DefaultAzureCredential()
+}
+
+const projectClient = new AIProjectClient(endpoint, getCredential())
 
 export async function POST(req: Request) {
     try {
@@ -63,9 +75,8 @@ export async function POST(req: Request) {
         })
     } catch (error) {
         console.error('Azure AI agent error:', error)
-        return NextResponse.json(
-            { error: 'Internal Server Error' },
-            { status: 500 }
-        )
+        const message =
+            error instanceof Error ? error.message : 'Internal Server Error'
+        return NextResponse.json({ error: message }, { status: 500 })
     }
 }
