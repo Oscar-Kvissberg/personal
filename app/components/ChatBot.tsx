@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { IoMdSend } from 'react-icons/io'
 import { BsChatDots } from 'react-icons/bs'
 import { IoClose } from 'react-icons/io5'
@@ -15,12 +15,24 @@ export default function ChatBot({ onOpenChat }: ChatBotProps) {
     const [isLoading, setIsLoading] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
     const [conversationId, setConversationId] = useState<string | null>(null)
+    const inputRef = useRef<HTMLInputElement>(null)
+    const messagesEndRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         onOpenChat(() => {
             setIsOpen(true)
         })
     }, [onOpenChat])
+
+    useEffect(() => {
+        if (isOpen) {
+            inputRef.current?.focus()
+        }
+    }, [isOpen])
+
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    }, [messages, isLoading])
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -79,7 +91,7 @@ export default function ChatBot({ onOpenChat }: ChatBotProps) {
                     <BsChatDots className="w-6 h-6" />
                 </button>
             ) : (
-                <div className="bg-gray-900 border border-gray-800 rounded-lg shadow-xl w-[350px]">
+                <div className="bg-gray-900 border border-gray-800 rounded-lg shadow-xl w-[min(350px,calc(100vw-2rem))] md:w-[440px] lg:w-[520px]">
                     <div className="flex items-center border-b border-gray-800">
                         <div className="flex-1 p-4 flex items-center gap-2">
                             <div className="w-2 h-2 bg-green-500 rounded-full" />
@@ -122,11 +134,13 @@ export default function ChatBot({ onOpenChat }: ChatBotProps) {
                                     Thinking...
                                 </div>
                             )}
+                            <div ref={messagesEndRef} />
                         </div>
 
                         <form onSubmit={handleSubmit} className="p-4 border-t border-gray-800">
                             <div className="flex gap-2">
                                 <input
+                                    ref={inputRef}
                                     type="text"
                                     value={input}
                                     onChange={(e) => setInput(e.target.value)}

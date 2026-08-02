@@ -104,7 +104,7 @@ export default function Home() {
                       📍Sweden, Stockholm
                     </p>
                     <p className="text-sm sm:text-base text-white/80">
-                      I enjoy creating shareholder value, playing Block Ops 2 and downing instant coffee like it&apos;s liquid gold.
+                      I enjoy creating shareholder value, playing Black Ops 2 and downing instant coffee like it&apos;s liquid gold.
                     </p>
                     <button
                       onClick={handleOpenChat}

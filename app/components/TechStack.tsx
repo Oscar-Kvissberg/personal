@@ -13,7 +13,7 @@ const technologies = [
         color: '#3776AB'
     },
     {
-        name: 'Excel VBA',
+        name: 'Excel',
         icon: FaFileExcel,
         color: '#217346'
     }
