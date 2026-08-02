@@ -101,17 +101,16 @@ export default function Home() {
                     <p className="text-sm sm:text-base text-white/80">
                       Business consultant 
                                     <br />
-
                       📍Sweden, Stockholm
                     </p>
                     <p className="text-sm sm:text-base text-white/80">
-                      I enjoy solving problems, playing Counter Strike 2, and downing instant coffee like it&apos;s liquid gold.
+                      I enjoy creating shareholder value, playing Block Ops 2 and downing instant coffee like it&apos;s liquid gold.
                     </p>
                     <button
                       onClick={handleOpenChat}
                       className="flex items-center gap-2 text-xs sm:text-sm mt-2 group hover:scale-105 transition-transform origin-left"
                     >
-                      <span className="neon-text group-hover:text-shadow-strong">Ask the chatbot anything about me</span>
+                      <span className="neon-text group-hover:text-shadow-strong">AI Oscar can answer anything about me</span>
                       <BsArrowDown className="w-4 h-4 sm:w-5 sm:h-5 animate-bounce neon-icon group-hover:filter-strong" />
                     </button>
                   </div>

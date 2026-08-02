@@ -3,24 +3,9 @@ import { SiTypescript, SiTailwindcss, SiNextdotjs } from 'react-icons/si'
 
 const technologies = [
     {
-        name: 'React',
-        icon: FaReact,
-        color: '#61DAFB'
-    },
-    {
         name: 'Next.js',
         icon: SiNextdotjs,
         color: '#ffffff'
-    },
-    {
-        name: 'TypeScript',
-        icon: SiTypescript,
-        color: '#3178C6'
-    },
-    {
-        name: 'Tailwind',
-        icon: SiTailwindcss,
-        color: '#38B2AC'
     },
     {
         name: 'Python',

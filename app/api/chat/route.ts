@@ -23,6 +23,15 @@ function getCredential() {
 
 const projectClient = new AIProjectClient(endpoint, getCredential())
 
+/** Strip RAG citation markers like 【8:0†source】 from agent output. */
+function stripCitations(text: string | null | undefined): string {
+    if (!text) return ''
+    return text
+        .replace(/【\d+:\d+†[^】]*】/g, '')
+        .replace(/\s{2,}/g, ' ')
+        .trim()
+}
+
 export async function POST(req: Request) {
     try {
         const { message, conversationId } = await req.json()
@@ -56,7 +65,7 @@ export async function POST(req: Request) {
             )
 
             return NextResponse.json({
-                message: response.output_text,
+                message: stripCitations(response.output_text),
                 conversationId: activeConversationId,
             })
         }
@@ -70,7 +79,7 @@ export async function POST(req: Request) {
         )
 
         return NextResponse.json({
-            message: response.output_text,
+            message: stripCitations(response.output_text),
             conversationId: activeConversationId,
         })
     } catch (error) {

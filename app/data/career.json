@@ -1,10 +1,31 @@
 {
     "career": [
-        
+        {
+            "title": "Business Consultant",
+            "company": "CGI",
+            "location": "Stockholm, Sweden",
+            "startDate": "Aug 2025",
+            "endDate": "Present",
+            "description": [
+                "Led analysis of supply chain KPIs for a global manufacturing client through stakeholder interviews and cross-regional workshops, resulting in an approved KPI framework and implementation roadmap for Oracle Transportation Management.",
+                "Led the day-to-day coordination of a 12-person agile delivery team during a large-scale infrastructure modernization, ensuring sprint progress, stakeholder alignment, and successful delivery of a Pega platform upgrade to Kubernetes and Linux.",
+                "Managed the delivery of a manufacturing and data PoC for a global industrial client by developing the project plan, coordinating stakeholders, defining requirements, and ensuring alignment on deliverables.",
+                "Supported business development by participating in global client sales dialogues, proposal development, and preparation of executive client-facing presentation materials.",
+                "Strengthened consulting, analytical, and communication skills through CGI's Selected program, while applying Excel and Power BI in client engagements and delivering internal Excel training sessions."
+            ],
+            "tags": [
+                "Project Management",
+                "Business Analysis",
+                "Power BI",
+                "Excel",
+                "Powerpoint"
+            ],
+            "logo": "/images/cgi3.png"
+        },
         {
             "title": "Co-founder and CEO",
             "company": "Catalina Software Solutions AB",
-            "location": "Linköping",
+            "location": "Stockholm",
             "startDate": "Jun 2024",
             "endDate": "Present",
             "description": [
