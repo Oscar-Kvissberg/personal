@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server'
 import { ClientSecretCredential, DefaultAzureCredential } from '@azure/identity'
 import { AIProjectClient } from '@azure/ai-projects'
 
+export const maxDuration = 60
+export const runtime = 'nodejs'
+
 const endpoint =
     process.env.AZURE_AI_PROJECT_ENDPOINT ??
     'https://foundryprojectoscar.services.ai.azure.com/api/projects/proj-default'

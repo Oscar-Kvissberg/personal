@@ -53,7 +53,18 @@ export default function ChatBot({ onOpenChat }: ChatBotProps) {
                 }),
             })
 
-            const data = await response.json()
+            const raw = await response.text()
+            let data: { message?: string; conversationId?: string; error?: string }
+            try {
+                data = JSON.parse(raw)
+            } catch {
+                throw new Error(
+                    response.status === 504
+                        ? 'Svaret tog för lång tid. Försök igen.'
+                        : `Serverfel (${response.status})`
+                )
+            }
+
             if (!response.ok || data.error) {
                 throw new Error(data.error || 'API request failed')
             }
@@ -64,7 +75,7 @@ export default function ChatBot({ onOpenChat }: ChatBotProps) {
 
             setMessages(prev => [...prev, {
                 role: 'assistant',
-                content: data.message
+                content: data.message ?? ''
             }])
         } catch (error) {
             console.error('Error:', error)
